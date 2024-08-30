@@ -1,4 +1,4 @@
-#include "simpleshell.c"
+#include "simpleshell.h"
 
 /**
  * main - entry point for the sinple shell prog
