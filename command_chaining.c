@@ -53,7 +53,7 @@ void handle_cmd_chain(shell_info_t *inf, char *buff, size_t *indx,
 			pos = buf_l;
 		}
 	}
-	else if (info->buffer_type == CHAIN_OR)
+	else if (inf->buffer_type == CHAIN_OR)
 	{
 		if (!inf->last_status)
 		{
@@ -117,10 +117,10 @@ int change_vars(shell_info_t *inf)
 		if (!strcmp(inf->args[u], "$$"))
 		{
 			replace_string(&(inf->args[u]),
-					_strd_up(conver_num(getpid(), 10, 0)));
+					_strd_up(convert_num(getpid(), 10, 0)));
 			continue;
 		}
-		nod = find_node_with_prefix(inf->env_list, &inf->args[u][1], '=');
+		nod = find_node_with_prefix(inf->env_list, inf->args[u] + 1, '=');
 		if (nod)
 		{
 			replace_string(&(inf->args[u]),
