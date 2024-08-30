@@ -28,6 +28,7 @@ char *get_envval(shell_info_t *shell_info, const char *varbl_name)
 	while (nod)
 	{
 		val = str_starts_with(nod->value, varbl_name);
+		val = start_with(nod->val, varbl_name);
 		if (val && *val)
 			return (val);
 		nod = nod->next;
