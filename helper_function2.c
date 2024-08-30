@@ -16,7 +16,7 @@ char *convert_num(long int n, int base, int flags)
 	char *pointer;
 	unsigned long num = n;
 
-	if (!(flags & CONVERT_TO_UNSIGNED) && num < 0)
+	if (!(flags & CONVERT_TO_UNSIGNED) && n < 0)
 	{
 		num = -n;
 		sign = '-';

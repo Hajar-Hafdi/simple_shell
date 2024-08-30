@@ -18,8 +18,8 @@ int hsh(shell_info_t *shell_info, char **argv)
 		init_shedata(shell_info);
 		if (is_interactive(shell_info))
 			_puts("$ ");
-		error_putchar(BUF_FLUSH);
-		r = get_cmd(shell_info);
+		error_putchar(FLUSH_BUFFER);
+		res = get_cmd(shell_info);
 		if (res != -1)
 		{
 			config_data(shell_info, argv);
@@ -70,7 +70,7 @@ int find_built_in(shell_info_t *shell_info)
 	};
 
 	for (k = 0; btintbl[k].command; k++)
-		if (_strcmp(shell_info->args[0], btintbl[k].command) == 0)
+		if (_str_cmp(shell_info->args[0], btintbl[k].command) == 0)
 		{
 			shell_info->exec_count++;
 			built_in_r = btintbl[k].func(shell_info);
@@ -91,14 +91,14 @@ void find_command(shell_info_t *shell_info)
 	char *c_path = NULL;
 	int a, b;
 
-	shell_info->curr_path = shell_info->args[0];
+	shell_info->current_path = shell_info->args[0];
 	if (shell_info->count_input == 1)
 	{
 		shell_info->exec_count++;
 		shell_info->count_input = 0;
 	}
 	for (a = 0, b = 0; shell_info->input[a]; a++)
-		if (!is_delim(shell_info->input[a], " \t\n"))
+		if (!is_delimeter(shell_info->input[a], " \t\n"))
 			b++;
 	if (!b)
 		return;
@@ -107,14 +107,14 @@ void find_command(shell_info_t *shell_info)
 		shell_info->args[0]);
 	if (c_path)
 	{
-		shell_info->curr_path = c_path;
+		shell_info->current_path = c_path;
 		fork_command(shell_info);
 	}
 	else
 	{
 		if ((is_interactive(shell_info) || get_envval(shell_info, "PATH=")
 			|| shell_info->args[0][0] == '/')
-			 && is_cmd(shell_info, shell_info->args[0]))
+			 && is_executable(shell_info, shell_info->args[0]))
 			fork_command(shell_info);
 		else if (*(shell_info->input) != '\n')
 		{
@@ -143,7 +143,7 @@ void fork_command(shell_info_t *shell_info)
 	}
 	if (pid_child == 0)
 	{
-		if (execve(shell_info->curr_path, shell_info->args,
+		if (execve(shell_info->current_path, shell_info->args,
 			release_shdata(shell_info)) == -1)
 		{
 			release_shdata(shell_info, 1);
