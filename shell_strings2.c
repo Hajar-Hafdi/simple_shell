@@ -30,7 +30,7 @@ char *_str_copy(char *desti, char *sorc)
  */
 char *_strd_up(const char *string)
 {
-	int length = 0;
+	int k, length = 0;
 	char *dupl;
 	const char *temp = string;
 
@@ -41,8 +41,8 @@ char *_strd_up(const char *string)
 	dupl = malloc(sizeof(char) * (length + 1));
 	if (!dupl)
 		return (NULL);
-	for (int i = 0; i < length; i++)
-		dupl[i] = string[i];
+	for (k = 0; k < length; k++)
+		dupl[k] = string[k];
 	dupl[length] = '\0';
 	return (dupl);
 }

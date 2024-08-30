@@ -11,7 +11,7 @@ char *_strn_cpy(char *desti, char *sorc, int n)
 {
 	int i;
 
-	for (i = 0; i < n && src[i] != '\0'; i++)
+	for (i = 0; i < n && sorc[i] != '\0'; i++)
 		desti[i] = sorc[i];
 
 	for (; i < n; i++)
