@@ -35,12 +35,12 @@ int unset_envir(shell_info_t *shell_data, char *envi_var)
 	while (nod)
 	{
 		begin = start_with(nod->value, envi_var);
-		if (begin && *begin == '=')
+		if (begin && *(begin + strlen(envi_var)) == '=')
 		{
 			shell_data->env_modified = remove_nd_idx(
 					&(shell_data->env_list), indx);
 			indx = 0;
-			nod = shell_data->env;
+			nod = shell_data->env_list;
 			continue;
 		}
 		nod = nod->next;
@@ -60,7 +60,7 @@ int unset_envir(shell_info_t *shell_data, char *envi_var)
 int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
 {
 	char *buff = NULL;
-	list_t *nod;
+	list_item_t *nod;
 	char *begin;
 
 	if (!envi_vari || !env_val)
@@ -71,12 +71,13 @@ int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
 		return (1);
 	_str_copy(buff, envi_vari);
 	_str_cat(buff, "=");
-	_str_cat(buff, value);
-	nod = shell_data->env;
+	_str_cat(buff, env_val);
+
+	nod = shell_data->env_list;
 	while (nod)
 	{
 		begin = start_with(nod->value, envi_vari);
-		if (begin && *begin == "=")
+		if (begin && *(begin + _str_length(envi_vari)) == '=')
 		{
 			free(nod->value);
 			nod->value = buff;
