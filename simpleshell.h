@@ -156,7 +156,7 @@ int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val);
 
 /* file_io_helpers.c */
 
-char retrieve_hist(shell_info_t *sdata);
+char *retrieve_hist(shell_info_t *sdata);
 int preserve_hist(shell_info_t *sdata);
 int scan_hist(shell_info_t *sdata);
 int add_to_history(shell_info_t *sdata, char *buff, int linec);

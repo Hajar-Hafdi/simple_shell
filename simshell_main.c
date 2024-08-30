@@ -15,7 +15,7 @@ int main(int arg_cnt, char **arg_val)
 
 	if (arg_cnt == 2)
 	{
-		input_file_desc = open(arg_val[1], 0_RDONLY);
+		input_file_desc = open(arg_val[1], O_RDONLY);
 		if (input_file_desc == -1)
 		{
 			if (errno == EACCES)
@@ -29,7 +29,7 @@ int main(int arg_cnt, char **arg_val)
 			}
 			return (EXIT_FAILURE);
 		}
-		shell_info.input_fd = input_file_descriptor;
+		shell_info.input_fd = input_file_desc;
 	}
 	pop_envlist(&shell_info);
 	retrieve_hist(&shell_info);
