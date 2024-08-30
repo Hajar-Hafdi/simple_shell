@@ -11,8 +11,8 @@ int **fetch_env(shell_info_t *shell_data)
 {
 	if (!shell_data->env_array || shell_data->env_modified)
 	{
-		shell_data->env_array = list_to_strings(shell_data->env);
-		shell_data_env_modified = 0;
+		shell_data->env_array = lst_str(shell_data->env_list);
+		shell_data->env_modified = 0;
 	}
 	return (shell_data->env_array);
 }
@@ -34,11 +34,11 @@ int unset_envir(shell_info_t *shell_data, char *envi_var)
 		return (0);
 	while (nod)
 	{
-		begin = starts_with(nod->str, envi_var);
+		begin = start_with(nod->value, envi_var);
 		if (begin && *begin == '=')
 		{
-			shell_data->env_modified = deleted_nod_at_index(
-					&(shell_data->env), indx);
+			shell_data->env_modified = remove_nd_idx(
+					&(shell_data->env_list), indx);
 			indx = 0;
 			nod = shell_data->env;
 			continue;
@@ -63,10 +63,10 @@ int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
 	list_t *nod;
 	char *begin;
 
-	if (envi_vari || !env_val)
+	if (!envi_vari || !env_val)
 		return (0);
 
-	buff = malloc(_strlen(envi_vari) + _strlen(env_val) + 2);
+	buff = malloc(_str_length(envi_vari) + _str_length(env_val) + 2);
 	if (!buff)
 		return (1);
 	_strcpy(buff, envi_vari);
@@ -75,7 +75,7 @@ int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
 	nod = shell_data->env;
 	while (nod)
 	{
-		begin = starts_with(nod->str, envi_vari);
+		begin = start_with(nod->value, envi_vari);
 		if (begin && *begin == "=")
 		{
 			free(nod->str);
@@ -85,7 +85,7 @@ int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
 		}
 		nod = node->next;
 	}
-	add_node_end(&(shell_data->env), buff, 0);
+	app_ndend(&(shell_data->env_list), buff, 0);
 	free(buff);
 	shell_data->env_modified = 1;
 	return (0);
