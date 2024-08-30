@@ -7,7 +7,7 @@
  *
  * Return: allocated string having hist file path
  */
-char retrieve_hist(shell_info_t *sdata)
+char *retrieve_hist(shell_info_t *sdata)
 {
 	char *buff, *home_dirct;
 
@@ -34,11 +34,11 @@ char retrieve_hist(shell_info_t *sdata)
 int preserve_hist(shell_info_t *sdata)
 {
 	ssize_t filed;
-	char *filenm = retrieve_hist(sdata);
+	char* filenm = retrieve_hist(sdata);
 	list_item_t *nod = NULL;
 
-	if (!filenm)
-		return (-1);
+	if (!filenm == NULL)
+		return (1);
 	filed = open(filenm, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filenm);
 	if (filed == -1)
@@ -66,8 +66,8 @@ int scan_hist(shell_info_t *sdata)
 	struct stat st;
 	char *buff = NULL, *filenm = retrieve_hist(sdata);
 
-	if (!filenm)
-		return (0);
+	if (!filenm == NULL)
+		return (1);
 	filed = open(filenm, O_RDONLY);
 	free(filenm);
 	if (filed == -1)
