@@ -11,17 +11,17 @@ char retrieve_hist(shell_info_t *sdata)
 {
 	char *buff, *home_dirct;
 
-	home_dirct = _getenv(sdata, "HOME=");
+	home_dirct = get_envval(sdata, "HOME=");
 	if (!home_dirct)
 		return (NULL);
 	buff = malloc(sizeof(char) *
-			(_strlen(home_dirct) + _strlen(HISTORY_FILE) + 2));
+			(_str_length(home_dirct) + _str_length(HISTORY_FILE) + 2));
 	if (!buff)
 		return (NULL);
 	buff[0] = 0;
-	_strcpy(buff, home_dirct);
-	_strcat(buff, "/");
-	_strcat(buff, HISTORY_FILE);
+	_str_cpy(buff, home_dirct);
+	_str_cat(buff, "/");
+	_str_cat(buff, HISTORY_FILE);
 	return (buff);
 }
 /**
@@ -34,7 +34,7 @@ char retrieve_hist(shell_info_t *sdata)
 int preserve_hist(shell_info_t *sdata)
 {
 	ssize_t filed;
-	char *filenm = retrieve_history_file(sdata);
+	char *filenm = retrieve_hist(sdata);
 	list_item_t *nod = NULL;
 
 	if (!filenm)
@@ -43,12 +43,12 @@ int preserve_hist(shell_info_t *sdata)
 	free(filenm);
 	if (filed == -1)
 		return (-1);
-	for (nod = sdata->cmd_history; nod; nod = node->next)
+	for (nod = sdata->cmd_history; nod; nod = nod->next)
 	{
-		_putsfd(nod->value, filed);
-		_putsfd('\n', filed);
+		_puts_filed(nod->value, filed);
+		_puts_filed('\n', filed);
 	}
-	_putsfd(FLUSH_BUFFER, filed);
+	_puts_filed(FLUSH_BUFFER, filed);
 	close(filed);
 	return (1);
 }
@@ -61,7 +61,7 @@ int preserve_hist(shell_info_t *sdata)
  */
 int scan_hist(shell_info_t *sdata)
 {
-	int u, linec = 0;
+	int u, linec = 0; last = 0;
 	ssize_t filed, readlen, files = 0;
 	struct start st;
 	char *buff = NULL, *filenm = retrieve_hist(sdata);
@@ -88,7 +88,7 @@ int scan_hist(shell_info_t *sdata)
 		if (buff[u] == '\n')
 		{
 			buff[u] = 0;
-			add_to_history(sdata, buff + last, linc++);
+			add_to_history(sdata, buff + last, linec++);
 			last = u + 1;
 		}
 	if (last != u)
@@ -96,7 +96,7 @@ int scan_hist(shell_info_t *sdata)
 	free(buff);
 	sdata->history_count = linec;
 	while (sdata->history_count-- >= MAXIMUM_HISTORY_ENTERIES)
-		remove_node_at_index(&(sdata->cmd_hist), 0);
+		remove_nd_idx(&(sdata->cmd_hist), 0);
 	update_history_num(sdata);
 	return (sdata->history_count);
 }
@@ -115,7 +115,7 @@ int add_to_history(shell_info_t *sdata, char *buff, int linec)
 
 	if (sdata->cmd_history)
 		nod = sdata->cmd_history;
-	add_node_end(&nod, buff, linec);
+	app_ndend(&nod, buff, linec);
 	if (!sdata->cmd_history)
 		sdata->cmd_history = nod;
 	return (0);
@@ -134,8 +134,8 @@ int update_history_num(shell_info_t *sdata)
 
 	while (nod)
 	{
-		node->number = u++;
-		nod = node->next;
+		nod->number = u++;
+		nod = nod->next;
 	}
 	return (sdata->history_count = u)
 }
