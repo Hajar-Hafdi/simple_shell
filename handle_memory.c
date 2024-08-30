@@ -11,8 +11,8 @@ char *_mem_set(char *str, char byte, unsigned int num)
 {
 	unsigned int k;
 
-	for (k = 0; k < n; k++)
-		s[k] = byte;
+	for (k = 0; k < num; k++)
+		str[k] = byte;
 	return (str);
 }
 

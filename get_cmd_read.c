@@ -12,7 +12,7 @@ ssize_t get_cmd(shell_info_t *sdata)
 	static char *bff;
 	static size_t u, k, lng;
 	ssize_t bread = 0;
-	char **arg_p = &(shell_info->args), *pntr;
+	char **arg_p = &(sdata->args), *pntr;
 
 	_putchar(FLUSH_BUFFER);
 	bread = buff_input(sdata, &bff, &lng);
@@ -50,7 +50,7 @@ ssize_t get_cmd(shell_info_t *sdata)
  *
  * Return: num of bytes read
  */
-ssize_read_bf(shell_info_t *sdata, char *screen, size_t *sze)
+ssize_t read_bf(shell_info_t *sdata, char *screen, size_t *sze)
 {
 	ssize_t bt_r = 0;
 

@@ -32,7 +32,7 @@ ssize_t buff_input(shell_info_t *sdata, char **buff, size_t *bulen)
 		}
 		sdata->count_input = 1;
 		remove_comm(*buff);
-		update_history_num(sdata, *buff, sdata->history_count++);
+		build_history_list(sdata, *buff, sdata->history_count++);
 		*bulen = by_read;
 		sdata->buffer = buff;
 	}
