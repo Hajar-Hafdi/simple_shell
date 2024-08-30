@@ -14,6 +14,8 @@
 #include <errno.h>
 
 /* Buffer sizes intended for writing as well as writing */
+
+#define READ_BUF_SIZE 1024
 #define INPUT_BUFFER_SIZE 1024
 #define OUTPUT_BUFFER_SIZE 1024
 #define FLUSH_BUFFER -1
@@ -96,7 +98,7 @@ typedef struct shell_info
 	int history_count;
 } shell_info_t;
 
-#define INFO_INIT\
+#define  INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 	CHAIN_NORMAL, -1, 0}
 
@@ -105,13 +107,15 @@ typedef struct shell_info
  * @command: the name of builtin cmd
  * @func: the function that impliments the builtin cmd
  */
-type struct builtin
+typedef struct builtin
 {
 	char *command;
 	int(*func)(shell_info_t *);
 } builtin_t;
 
 
+
+void _putchar(char c);
 /* buff_input.c */
 ssize_t buff_input(shell_info_t *sdata, char **buff, size_t *bulen);
 
@@ -159,7 +163,7 @@ int update_history_num(shell_info_t *sdata);
 
 /* get_cmd_read.c */
 ssize_t get_cmd(shell_info_t *sdata);
-ssize_tread_bf(shell_info_t *sdata, char *screen, size_t *sze);
+ssize_t read_bf(shell_info_t *sdata, char *screen, size_t *sze);
 
 /* _get_line.c */
 int sh_gline(shell_info_t *sdata, char **pnt, size_t *lng);
@@ -174,11 +178,11 @@ int sshell_alias(shell_info_t *shell_info);
 
 /* string_list.c */
 
-list_t *appnd_nd(list_t **hd, const char *string, int ber);
-list_t *app_ndend(list_t **hd, const char *string, int ber);
+list_item_t *appnd_nd(list_item_t **hd, const char *string, int ber);
+list_item_t *app_ndend(list_item_t **hd, const char *string, int ber);
 size_t output_lisval(const list_item_t *hd);
 int remove_nd_idx(list_item_t **hd, unsigned int idx);
-void open_list(list_t **hd_p);
+void open_list(list_item_t **hd_p);
 
 /*  string_list2.c */
 
@@ -189,7 +193,7 @@ list_item_t *nd_begin_with(list_item_t *nd, char prfx, char r);
 ssize_t aqu_nd_indx(list_item_t *hd, list_item_t *nd);
 
 
-int is_interactive(info_t *info);
+int is_interactive(shell_info_t *info);
 void _puts(char *string);
 int _put_char(char ch);
 int _str_length(char *str);

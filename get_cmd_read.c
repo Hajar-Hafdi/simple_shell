@@ -22,10 +22,10 @@ ssize_t get_cmd(shell_info_t *sdata)
 	{
 		k = u;
 		pntr = bff + u;
-		check_command_chain(sdata, bff, &k, u, lng);
+		handle_cmd_chain(sdata, bff, &k, u, lng);
 		while (k < lng)
 		{
-			if (is_command_chain(sdata, bff, &k))
+			if (cmd_chain(sdata, bff, &k))
 				break;
 			k++;
 		}
@@ -36,7 +36,7 @@ ssize_t get_cmd(shell_info_t *sdata)
 			sdata->buffer_type = CHAIN_NORMAL;
 		}
 		*arg_p = pntr;
-		return (_strlen(pntr));
+		return (_str_length(pntr));
 	}
 	*arg_p = bff;
 	return (bread);
@@ -50,7 +50,7 @@ ssize_t get_cmd(shell_info_t *sdata)
  *
  * Return: num of bytes read
  */
-ssize_tread_bf(shell_info_t *sdata, char *screen, size_t *sze)
+ssize_read_bf(shell_info_t *sdata, char *screen, size_t *sze)
 {
 	ssize_t bt_r = 0;
 

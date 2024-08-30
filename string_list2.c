@@ -34,12 +34,12 @@ char **lst_str(list_item_t *hd)
 
 	if (!hd || !u)
 		return (NULL);
-	s = malloc(sizeof(char 8) * (u + 1));
+	s = malloc(sizeof(char*) * (u + 1));
 	if (!s)
 		return (NULL);
 	for (u = 0; nd; nd = nd->next, u++)
 	{
-		string = malloc(_strlen(nd->value) + 1);
+		string = malloc(strlen(nd->value) + 1);
 		if (!string)
 		{
 			for (k = 0; k < u; k++)
@@ -47,7 +47,7 @@ char **lst_str(list_item_t *hd)
 			free(s);
 			return (NULL);
 		}
-		string = _strcpy(string, nd->value);
+		strcpy(string, nd->value);
 		s[u] = string;
 	}
 	s[u] = NULL;
@@ -66,9 +66,9 @@ size_t output_list(const list_item_t *hd)
 
 	while (hd)
 	{
-		_puts(convert_number(hd->number, 10, 0));
-		_putchar(':');
-		_putchar(' ');
+		_puts(convert_num(hd->number, 10, 0));
+		putchar(':');
+		putchar(' ');
 		_puts(hd->value ? hd->value : "(nil)");
 		_puts("\n");
 		hd = hd->next;
@@ -91,7 +91,7 @@ list_item_t *nd_begin_with(list_item_t *nd, char prfx, char r)
 
 	while (nd)
 	{
-		a = starts_with(nd->value, prfx);
+		a = start_with(nd->value, prfx);
 		if (a && ((r == -1) || (*a == r)))
 			return (nd);
 		nd = nd->next;

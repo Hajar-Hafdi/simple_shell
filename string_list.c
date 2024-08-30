@@ -1,4 +1,6 @@
 #include "simpleshell.h"
+#include <string.h>
+#include <stdlib.h>
 
 /**
  * appnd_nd - adds a node to the strt of the list
@@ -9,9 +11,9 @@
  *
  * Return: returns the sze of the list
  */
-list_t *appnd_nd(list_t **hd, const char *string, int ber)
+list_item_t *appnd_nd(list_item_t **hd, const char *string, int ber)
 {
-	list_t *nw_ed;
+	list_item_t *nw_ed;
 
 	if (!hd)
 		return (NULL);
@@ -22,7 +24,7 @@ list_t *appnd_nd(list_t **hd, const char *string, int ber)
 	nw_ed->number = ber;
 	if (string)
 	{
-		ne_ed->value = _strdup(string);
+		nw_ed->value = strdup(string);
 		if (!nw_ed->value)
 		{
 			free(nw_ed);
@@ -42,21 +44,21 @@ list_t *appnd_nd(list_t **hd, const char *string, int ber)
  *
  * Return: sz of list
  */
-list_t *app_ndend(list_t **hd, const char *string, int ber)
+list_item_t *app_ndend(list_item_t **hd, const char *string, int ber)
 {
-	list_t *nw_nd, *nd;
+	list_item_t *nw_nd, *nd;
 
 	if (!hd)
 		return (NULL);
 	nd = *hd;
 	nw_nd = malloc(sizeof(list_item_t));
-	if (!nw__nd)
+	if (!nw_nd)
 		return (NULL);
-	_memset((void *)nw_nd, 0, sizeof(list_item_t));
+	_mem_set((void *)nw_nd, 0, sizeof(list_item_t));
 	nw_nd->number = ber;
 	if (string)
 	{
-		nw_nd->value = _strdup(string);
+		nw_nd->value = _strd_up(string);
 		if (!nw_nd->value)
 		{
 			free(nw_nd);
@@ -114,14 +116,15 @@ int remove_nd_idx(list_item_t **hd, unsigned int idx)
 		*hd = (*hd)->next;
 		free(nd->value);
 		free(nd);
-		return (-1);
+		return (1);
 	}
 	nd = *hd;
+	old_nd = NULL;
 	while (nd)
 	{
 		if (u == idx)
 		{
-			old_nd->next = n->next;
+			old_nd->next = nd->next;
 			free(nd->value);
 			free(nd);
 			return (1);
@@ -139,9 +142,9 @@ int remove_nd_idx(list_item_t **hd, unsigned int idx)
  *
  * Return: void
  */
-void open_list(list_t **hd_p)
+void open_list(list_item_t **hd_p)
 {
-	list_t *nd, *nxt_nd, *hd;
+	list_item_t *nd, *nxt_nd, *hd;
 
 	if (!hd_p || !*hd_p)
 		return;

@@ -1,4 +1,6 @@
 #include "simpleshell.h"
+#include <string.h>
+#include <stdio.h>
 
 /**
  * display_history - displaays the cmd his list with line nums
@@ -9,6 +11,8 @@
  */
 int display_history(shell_info_t *shell_info)
 {
+	if (!shell_info || !shell_info->cmd_history)
+		return (1);
 	print_list(shell_info->cmd_history);
 	return (0);
 }
@@ -25,14 +29,14 @@ int erase_alias(shell_info_t *shell_info, char *alias_string)
 	char *alias_pos, alias_char;
 	int outcome;
 
-	alias_pos = _strchr(alias_string, '=');
+	alias_pos = strchr(alias_string, '=');
 	if (!alias_pos)
 		return (1);
 	alias_char = *alias_pos;
 	*alias_pos = '\0';
-	outcome = delete_node_at_index(&(shell_info->aliases);
-			get_node_index(shell_info->aliases, node_starts_with
-				(shell_info->aliases, alias_string, -1)));
+	outcome = remove_nd_idx(&(shell_info->aliases),
+			aqu_nd_indx(shell_info->aliases,
+				nd_begin_with(shell_info->aliases, alias_string, -1)));
 	*alias_pos = alias_char;
 	return (outcome);
 }
@@ -48,13 +52,12 @@ int allot_alias(shell_info_t *shell_info, char *alias_string)
 {
 	char *alias_p;
 
-	alias_p = _strchr(alias_string, "=");
+	alias_p = strchr(alias_string, '=');
 	if (!alias_p)
 		return (1);
 	if (!*++alias_p)
 		return (allot_alias(shell_info, alias_string));
-	allot_alias(shell_info, alias_string);
-	return (add_node_end(&(shell_info->aliases), alias_string, 0) == NULL);
+	return (app_ndend(&(shell_info->aliases), alias_string, 0) == NULL);
 }
 /**
  * output_alias - prints an alias string
@@ -69,13 +72,12 @@ int output_alias(list_item_t *alias_n)
 
 	if (alias_n)
 	{
-		alias_p = strchr(alias_node->value, '=');
+		alias_p = strchr(alias_n->value, '=');
 		for (alias_string = alias_n->value; alias_string <= alias_p; alias_string++)
-			_putchar(*alias_string);
-		_putchar('\'');
-		_puts(alias_p + 1);
-		_puts(alias_p + 1);
-		_puts("\n");
+			putchar(*alias_string);
+		putchar('\'');
+		puts(alias_p + 1);
+		puts("\n");
 		return (0);
 	}
 	return (1);
@@ -93,9 +95,9 @@ int sshell_alias(shell_info_t *shell_info)
 	char *alias_p = NULL;
 	list_item_t *alias_n = NULL;
 
-	if (shell_info->arg_cnt == 1)
+	if (shell_info->arg_count == 1)
 	{
-		alias_node = shell_info->aliases;
+		alias_n = shell_info->aliases;
 		while (alias_n)
 		{
 			output_alias(alias_n);
@@ -105,11 +107,11 @@ int sshell_alias(shell_info_t *shell_info)
 	}
 	for (u = 1; shell_info->args[u]; u++)
 	{
-		alias_p = _strchr(shell_info->args[i], '=');
-		if (alais_p)
+		alias_p = strchr(shell_info->args[u], '=');
+		if (alias_p)
 			allot_alias(shell_info, shell_info->args[u]);
 		else
-			output_alias(node_starts_with(shell_info->aliases,
+			output_alias(nd_begin_with(shell_info->aliases,
 						shell_info->args[u], '='));
 	}
 	return (0);
