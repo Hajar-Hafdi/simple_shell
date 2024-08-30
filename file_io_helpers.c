@@ -19,7 +19,7 @@ char retrieve_hist(shell_info_t *sdata)
 	if (!buff)
 		return (NULL);
 	buff[0] = 0;
-	_str_cpy(buff, home_dirct);
+	_str_copy(buff, home_dirct);
 	_str_cat(buff, "/");
 	_str_cat(buff, HISTORY_FILE);
 	return (buff);
@@ -39,14 +39,14 @@ int preserve_hist(shell_info_t *sdata)
 
 	if (!filenm)
 		return (-1);
-	filrd = open(filenm, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	filed = open(filenm, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filenm);
 	if (filed == -1)
 		return (-1);
 	for (nod = sdata->cmd_history; nod; nod = nod->next)
 	{
 		_puts_filed(nod->value, filed);
-		_puts_filed('\n', filed);
+		_puts_filed("\n", filed);
 	}
 	_puts_filed(FLUSH_BUFFER, filed);
 	close(filed);
@@ -61,9 +61,9 @@ int preserve_hist(shell_info_t *sdata)
  */
 int scan_hist(shell_info_t *sdata)
 {
-	int u, linec = 0; last = 0;
+	int u, linec = 0, last = 0;
 	ssize_t filed, readlen, files = 0;
-	struct start st;
+	struct stat st;
 	char *buff = NULL, *filenm = retrieve_hist(sdata);
 
 	if (!filenm)
@@ -96,7 +96,7 @@ int scan_hist(shell_info_t *sdata)
 	free(buff);
 	sdata->history_count = linec;
 	while (sdata->history_count-- >= MAXIMUM_HISTORY_ENTERIES)
-		remove_nd_idx(&(sdata->cmd_hist), 0);
+		remove_nd_idx(&(sdata->cmd_history), 0);
 	update_history_num(sdata);
 	return (sdata->history_count);
 }
@@ -137,5 +137,5 @@ int update_history_num(shell_info_t *sdata)
 		nod->number = u++;
 		nod = nod->next;
 	}
-	return (sdata->history_count = u)
+	return (sdata->history_count = u);
 }
