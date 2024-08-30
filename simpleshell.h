@@ -136,7 +136,7 @@ int cmd_chain(shell_info_t *shell_info, char *buff, size_t *pos);
 /*  data.c */
 
 void init_shedata(shell_info_t *sdata);
-void config_data(shell_info_t *sdata, char *argvec);
+void config_data(shell_info_t *sdata, char **argvec);
 void release_shdata(shell_info_t *shell_info, int freeall);
 
 /* simshell_main.c */
@@ -150,7 +150,7 @@ int remove_env_var(shell_info_t *shell_info);
 int pop_envlist(shell_info_t *shell_info);
 
 /* envir2.c */
-int **fetch_env(shell_info_t *shell_data);
+char **fetch_env(shell_info_t *shell_data);
 int unset_envir(shell_info_t *shell_data, char *envi_var);
 int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val);
 
@@ -224,7 +224,7 @@ int print_decimal(int input, int filed);
 /* handle_errors.c */
 void error_puts(char *string);
 int error_putchar(char ch);
-int _put_filed(char ch, int filed);
+int _put_filed(char *string, int filed);
 int _puts_filed(char *string, int filed);
 
 /*helper_function2.c */
