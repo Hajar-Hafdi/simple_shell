@@ -190,7 +190,7 @@ void open_list(list_item_t **hd_p);
 size_t lst_lng(const list_item_t *hd);
 char **lst_str(list_item_t *hd);
 size_t output_list(const list_item_t *hd);
-list_item_t *nd_begin_with(list_item_t *nd, char prfx, char r);
+list_item_t *nd_begin_with(list_item_t *nd, char *prfx, char r);
 ssize_t aqu_nd_indx(list_item_t *hd, list_item_t *nd);
 
 int is_interactive(shell_info_t *info);
@@ -247,5 +247,8 @@ int hsh(shell_info_t *shell_info, char **argv);
 int find_built_in(shell_info_t *shell_info);
 void find_command(shell_info_t *shell_info);
 void fork_command(shell_info_t *shell_info);
+
+
+list_item_t *find_node_with_prefix(list_item_t *nd, char *prfx, char r);
 
 #endif
