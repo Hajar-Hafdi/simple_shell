@@ -27,7 +27,7 @@ char *get_envval(shell_info_t *shell_info, const char *varbl_name)
 
 	while (nod)
 	{
-		val = str_starts_with(nod->val, varbl_name);
+		val = str_starts_with(nod->value, varbl_name);
 		if (val && *val)
 			return (val);
 		nod = nod->next;
@@ -63,7 +63,7 @@ int remove_env_var(shell_info_t *shell_info)
 {
 	int u;
 
-	if (shell_info->arg_cnt == 1)
+	if (shell_info->arg_count == 1)
 	{
 		print_error("Error: Not enough arguments provided\n");
 		return (1);
@@ -84,7 +84,7 @@ int pop_envlist(shell_info_t *shell_info)
 	list_item_t *nod = NULL;
 	size_t u;
 
-	for (u = 0; environ[u]; u++)
+	for (u = 0; environment[u]; u++)
 		app_ndend(&nod, environ[u], 0);
 	shell_info->env_list = nod;
 	return (0);
