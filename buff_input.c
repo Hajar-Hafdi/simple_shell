@@ -24,6 +24,7 @@ ssize_t buff_input(shell_info_t *sdata, char **buff, size_t *bulen)
 	by_read = sh_gline(sdata, buff, &lentm);
 #endif
 	if (by_read > 0)
+	{
 		if ((*buff)[by_read - 1] == '\n')
 		{
 			(*buff)[by_read - 1] = '\0';
@@ -34,7 +35,6 @@ ssize_t buff_input(shell_info_t *sdata, char **buff, size_t *bulen)
 		update_history_num(sdata, *buff, sdata->history_count++);
 		*bulen = by_read;
 		sdata->buffer = buff;
-		}
 	}
 	return (by_read);
 }
