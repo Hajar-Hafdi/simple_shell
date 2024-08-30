@@ -43,12 +43,12 @@ char *get_envval(shell_info_t *shell_info, const char *varbl_name)
  */
 int set_enviro_var(shell_info_t *shell_info)
 {
-	if (shell_info->arg_cnt != 3)
+	if (shell_info->arg_count != 3)
 	{
 		print_error("Error: arguments number invalid\n");
 		return (1);
 	}
-	if (set_enviro_var(shell_info, shell_info->args[1], shell_info->args[2]))
+	if (assign_env(shell_info, shell_info->args[1], shell_info->args[2]))
 		return (0);
 	return (1);
 }
@@ -68,8 +68,8 @@ int remove_env_var(shell_info_t *shell_info)
 		print_error("Error: Not enough arguments provided\n");
 		return (1);
 	}
-	for (u = 1, u <= shell_info->arg_cnt; u++)
-		remove_env_var(shell_info, shell_info->args[u]);
+	for (u = 1, u <= shell_info->arg_count; u++)
+		unset_envir(shell_info, shell_info->args[u]);
 	return (0);
 }
 /**
@@ -85,7 +85,7 @@ int pop_envlist(shell_info_t *shell_info)
 	size_t u;
 
 	for (u = 0; environ[u]; u++)
-		add_node_end(&nod, environ[u], 0);
+		app_ndend(&nod, environ[u], 0);
 	shell_info->env_list = nod;
 	return (0);
 }
