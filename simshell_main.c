@@ -18,21 +18,21 @@ int main(int arg_cnt, char **arg_val)
 		input_file_desc = open(arg_val[1], 0_RDONLY);
 		if (input_file_desc == -1)
 		{
-			if (erro == EACCES)
+			if (errno == EACCES)
 				exit(126);
-			if (erro == ENOENT)
+			if (errno == ENOENT)
 			{
-				_eputs(arg_val[0]);
-				_eputs(": 0: Can't open ");
-				_eputs(arg_val[1]);
+				error_puts(arg_val[0]);
+				error_puts("wasn't able to open");
+				error_puts(arg_val[1]);
 				exit(127);
 			}
 			return (EXIT_FAILURE);
 		}
 		shell_info.input_fd = input_file_descriptor;
 	}
-	populate_env_list(&shell_info);
-	read_history(&shell_info);
+	pop_envlist(&shell_info);
+	retrieve_hist(&shell_info);
 	hsh(&shell_info, arg_val);
 	return (EXIT_SUCCESS);
 }
