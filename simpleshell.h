@@ -38,7 +38,7 @@
 #define HISTORY_FILE     ".shell_history"
 #define MAXIMUM_HISTORY_ENTERIES 4096
 
-extern char **environment;
+extern char **environ;
 
 /**
  * struct list_item - item in a linked list.
