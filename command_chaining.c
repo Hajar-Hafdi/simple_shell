@@ -21,7 +21,7 @@ int cmd_chain(shell_info_t *shell_info, char *buff, size_t *pos)
 	}
 	else if (buff[indx] == ';')
 	{
-		buff[indx] = 0;
+		buff[indx] = '\0';
 		shell_info->buffer_type = CHAIN_NORMAL;
 	}
 	else
@@ -47,9 +47,9 @@ void handle_cmd_chain(shell_info_t *inf, char *buff, size_t *indx,
 
 	if (inf->buffer_type == CHAIN_AND)
 	{
-		if (info->last_status)
+		if (inf->last_status)
 		{
-			buff[strt] = 0;
+			buff[strt] = '\0';
 			pos = buf_l;
 		}
 	}
@@ -57,7 +57,7 @@ void handle_cmd_chain(shell_info_t *inf, char *buff, size_t *indx,
 	{
 		if (!inf->last_status)
 		{
-			buff[strt] = 0;
+			buff[strt] = '\0';
 			pos = buf_l;
 		}
 	}
@@ -117,7 +117,7 @@ int change_vars(shell_info_t *inf)
 		if (!strcmp(inf->args[u], "$$"))
 		{
 			replace_string(&(inf->args[u]),
-					_strd_up(conver_number(getpid(), 10, 0)));
+					_strd_up(conver_num(getpid(), 10, 0)));
 			continue;
 		}
 		nod = find_node_with_prefix(inf->env_list, &inf->args[u][1], '=');
