@@ -84,7 +84,7 @@ int print_decimal(int input, int filed)
 	int num, count = 0;
 
 	if (filed == STDERR_FILENO)
-		__put_char = _eputchar;
+		__put_char = error_putchar;
 	if (input < 0)
 	{
 		_absolute = -input;

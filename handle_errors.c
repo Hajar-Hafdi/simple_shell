@@ -14,7 +14,7 @@ void error_puts(char *string)
 		return;
 	while (string[k] != '\0')
 	{
-		_error_putchar(string[k]);
+		error_putchar(string[k]);
 		k++;
 	}
 }
@@ -78,7 +78,7 @@ int _puts_filed(char *string, int filed)
 		return (0);
 	while (*string)
 	{
-		i += _put_filed(*string++, filed);
+		k += _put_filed(*string++, filed);
 	}
-	return (i);
+	return (k);
 }
