@@ -7,7 +7,7 @@
  *
  * Return: always 0 (Success)
  */
-char **fetch_env(shell_info_t *shell_data)
+char **fetch_env(shellinfo_t *shell_data)
 {
 	if (!shell_data->env_array || shell_data->env_modified)
 	{
@@ -24,27 +24,27 @@ char **fetch_env(shell_info_t *shell_data)
  *
  * Return: 1 if deleted, 0 otherwise
  */
-int unset_envir(shell_info_t *shell_data, char *envi_var)
+int unset_envir(shellinfo_t *shell_data, char *envi_var)
 {
-	list_item_t *nod = shell_data->env_list;
-	size_t indx = 0;
-	char *begin;
+	list_item_t *node = shell_data->env_list;
+	size_t in = 0;
+	char *b;
 
-	if (!nod || !envi_var)
+	if (!node || !envi_var)
 		return (0);
-	while (nod)
+	while (node)
 	{
-		begin = start_with(nod->value, envi_var);
-		if (begin && *(begin + strlen(envi_var)) == '=')
+		b = start_with(nod->value, envi_var);
+		if (b && *b == '=')
 		{
 			shell_data->env_modified = remove_nd_idx(
-					&(shell_data->env_list), indx);
-			indx = 0;
-			nod = shell_data->env_list;
+					&(shell_data->env_list), in);
+			in = 0;
+			node = shell_data->env_list;
 			continue;
 		}
-		nod = nod->next;
-		indx++;
+		node = node->next;
+		in++;
 	}
 	return (shell_data->env_modified);
 }
@@ -57,11 +57,11 @@ int unset_envir(shell_info_t *shell_data, char *envi_var)
  *
  * Return: always 0 (Success)
  */
-int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
+int assign_env(shellinfo_t *shell_data, char *envi_vari, char *env_val)
 {
 	char *buff = NULL;
-	list_item_t *nod;
-	char *begin;
+	list_item_t *node;
+	char *b;
 
 	if (!envi_vari || !env_val)
 		return (0);
@@ -73,18 +73,18 @@ int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val)
 	_str_cat(buff, "=");
 	_str_cat(buff, env_val);
 
-	nod = shell_data->env_list;
-	while (nod)
+	node = shell_data->env_list;
+	while (node)
 	{
-		begin = start_with(nod->value, envi_vari);
-		if (begin && *(begin + _str_length(envi_vari)) == '=')
+		b = start_with(node->value, envi_vari);
+		if (b && *b == '=')
 		{
-			free(nod->value);
-			nod->value = buff;
+			free(node->value);
+			node->value = buff;
 			shell_data->env_modified = 1;
 			return (0);
 		}
-		nod = nod->next;
+		node = node->next;
 	}
 	app_ndend(&(shell_data->env_list), buff, 0);
 	free(buff);
