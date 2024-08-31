@@ -46,9 +46,9 @@ int preserve_hist(shell_info_t *sdata)
 	for (nod = sdata->cmd_history; nod; nod = nod->next)
 	{
 		_puts_filed(nod->value, filed);
-		_put_filed("\n", filed);
+		_puts_filed("\n", filed);
 	}
-	_put_filed("", filed);
+	_puts_filed("", filed);
 
 	return (1);
 }

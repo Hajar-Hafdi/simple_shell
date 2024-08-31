@@ -69,6 +69,6 @@ void release_shdata(shell_info_t *shell_info, int freeall)
 		b_free((void **)shell_info->buffer);
 		if (shell_info->input_fd > 2)
 			close(shell_info->input_fd);
-		_put_filed("", FLUSH_BUFFER);
+		_puts_filed("", FLUSH_BUFFER);
 	}
 }
