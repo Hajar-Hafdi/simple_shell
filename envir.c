@@ -7,7 +7,7 @@
  *
  * Return: Always 0 (Success)
  */
-int output_envir(shell_info_t *shell_info)
+int output_envir(shellinfo_t *shell_info)
 {
 	output_list(shell_info->env_list);
 	return (0);
@@ -20,17 +20,17 @@ int output_envir(shell_info_t *shell_info)
  *
  * Return: returns value of he env var
  */
-char *get_envval(shell_info_t *shell_info, const char *varbl_name)
+char *get_envval(shellinfo_t *shell_info, const char *varbl_name)
 {
-	list_item_t *nod = shell_info->env_list;
+	list_item_t *node = shell_info->env_list;
 	char *val;
 
-	while (nod)
+	while (node)
 	{
-		val = start_with(nod->value, varbl_name);
+		val = start_with(node->value, varbl_name);
 		if (val && *val)
 			return (val);
-		nod = nod->next;
+		node = node->next;
 	}
 	return (NULL);
 }
@@ -41,11 +41,11 @@ char *get_envval(shell_info_t *shell_info, const char *varbl_name)
  *
  * Return: 0 if succesful, 1 if not
  */
-int set_enviro_var(shell_info_t *shell_info)
+int set_enviro_var(shellinfo_t *shell_info)
 {
 	if (shell_info->arg_count != 3)
 	{
-		output_error(shell_info, "Error: arguments number invalid\n");
+		error_puts("Error: arguments number invalid\n");
 		return (1);
 	}
 	if (assign_env(shell_info, shell_info->args[1], shell_info->args[2]))
@@ -59,19 +59,17 @@ int set_enviro_var(shell_info_t *shell_info)
  *
  * Return: 0 if successful, 1 otherwise
  */
-int remove_env_var(shell_info_t *shell_info)
+int remove_env_var(shellinfo_t *shell_info)
 {
 	int u;
 
 	if (shell_info->arg_count == 1)
 	{
-		output_error(shell_info, "Error: Not enough arguments provided\n");
+		error_puts("Error: Not enough arguments provided\n");
 		return (1);
 	}
 	for (u = 1; u <= shell_info->arg_count; u++)
-	{
 		unset_envir(shell_info, shell_info->args[u]);
-	}
 	return (0);
 }
 /**
@@ -81,13 +79,13 @@ int remove_env_var(shell_info_t *shell_info)
  *
  * Return: always 0 (Success0
  */
-int pop_envlist(shell_info_t *shell_info)
+int pop_envlist(shellinfo_t *shell_info)
 {
-	list_item_t *nod = NULL;
+	list_item_t *node = NULL;
 	size_t u;
 
 	for (u = 0; environ[u]; u++)
-		app_ndend(&nod, environ[u], 0);
-	shell_info->env_list = nod;
+		app_ndend(&node, environ[u], 0);
+	shell_info->env_list = node;
 	return (0);
 }
