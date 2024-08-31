@@ -159,11 +159,11 @@ int r_hist(shellinfo_t *sdata);
 int add_to_history(shellinfo_t *sdata, char *buff, int linec);
 int updhistory_num(shellinfo_t *sdata);
 
-/* get_ln.c */
+/* _get_ln.c */
 ssize_t _getinpu(shellinfo_t *sdata);
 int gt_(shellinfo_t *sdata, char **screen, size_t *sze);
 void sigint(int dt);
-
+ssize_t r_bufff(shellinfo_t *sdata, char *screen, size_t *sze);
 
 /* more_builtin_handlers.c */
 int display_history(shellinfo_t *shell_info);
