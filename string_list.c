@@ -20,11 +20,11 @@ list_item_t *appnd_nd(list_item_t **hd, const char *string, int ber)
 	nw_ed = malloc(sizeof(list_item_t));
 	if (!nw_ed)
 		return (NULL);
-	memset((void *)nw_ed, 0, sizeof(list_item_t));
+	_mem_set((void *)nw_ed, 0, sizeof(list_item_t));
 	nw_ed->number = ber;
 	if (string)
 	{
-		nw_ed->value = strdup(string);
+		nw_ed->value = _strd_up(string);
 		if (!nw_ed->value)
 		{
 			free(nw_ed);
@@ -110,7 +110,7 @@ int remove_nd_idx(list_item_t **hd, unsigned int idx)
 
 	if (!hd || !*hd)
 		return (0);
-	if (idx == 0)
+	if (idx)
 	{
 		nd = *hd;
 		*hd = (*hd)->next;
@@ -119,7 +119,6 @@ int remove_nd_idx(list_item_t **hd, unsigned int idx)
 		return (1);
 	}
 	nd = *hd;
-	old_nd = NULL;
 	while (nd)
 	{
 		if (u == idx)
@@ -136,13 +135,13 @@ int remove_nd_idx(list_item_t **hd, unsigned int idx)
 	return (0);
 }
 /**
- * open_list - oprns and frees all nodes of a list
+ * libre_list - oprns and frees all nodes of a list
  *
  * @hd_p: address of ptr to head nd
  *
  * Return: void
  */
-void open_list(list_item_t **hd_p)
+void libre_list(list_item_t **hd_p)
 {
 	list_item_t *nd, *nxt_nd, *hd;
 

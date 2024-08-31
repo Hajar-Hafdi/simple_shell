@@ -35,7 +35,7 @@ int simshell_exit(shellinfo_t *shell_info)
  *
  * Return: Always 0 (Success)
  */
-int shell_curdir(shell_info_t *shell_info)
+int shell_curdir(shellinfo_t *shell_info)
 {
 	char *o, drt, buffer[1024];
 	int chdir_ret;
@@ -83,7 +83,7 @@ int shell_curdir(shell_info_t *shell_info)
  *
  * Return: Always 0 (Success)
  */
-int simshell_help(shell_info_t *shell_info)
+int simshell_help(shellinfo_t *shell_info)
 {
 	char **arg_vt;
 

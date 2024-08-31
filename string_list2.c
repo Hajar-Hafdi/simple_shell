@@ -39,7 +39,7 @@ char **lst_str(list_item_t *hd)
 		return (NULL);
 	for (u = 0; nd; nd = nd->next, u++)
 	{
-		string = malloc(strlen(nd->value) + 1);
+		string = malloc(_str_length(nd->value) + 1);
 		if (!string)
 		{
 			for (k = 0; k < u; k++)
@@ -47,7 +47,7 @@ char **lst_str(list_item_t *hd)
 			free(s);
 			return (NULL);
 		}
-		strcpy(string, nd->value);
+		string = _str_copy(string, nd->value);
 		s[u] = string;
 	}
 	s[u] = NULL;

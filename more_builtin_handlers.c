@@ -9,7 +9,7 @@
  *
  * Return: Always 0 (Success)
  */
-int display_history(shell_info_t *shell_info)
+int display_history(shellinfo_t *shell_info)
 {
 	output_list(shell_info->cmd_history);
 	return (0);
@@ -22,7 +22,7 @@ int display_history(shell_info_t *shell_info)
  *
  * Return: Always 0 if successful, 1 otherwise
  */
-int erase_alias(shell_info_t *shell_info, char *alias_string)
+int erase_alias(shellinfo_t *shell_info, char *alias_string)
 {
 	char *sign, tempp;
 	int outcome;
@@ -46,7 +46,7 @@ int erase_alias(shell_info_t *shell_info, char *alias_string)
  *
  * Return: always 0 if successful, 1 otherwise
  */
-int allot_alias(shell_info_t *shell_info, char *alias_string)
+int allot_alias(shellinfo_t *shell_info, char *alias_string)
 {
 	char *signn;
 
@@ -88,7 +88,7 @@ int output_alias(list_item_t *alias_n)
  *
  * Return: always 0 (Success)
  */
-int sshell_alias(shell_info_t *shell_info)
+int sshell_alias(shellinfo_t *shell_info)
 {
 	int u = 0;
 	char *ssign = NULL;
