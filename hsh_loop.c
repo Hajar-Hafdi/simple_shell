@@ -15,11 +15,11 @@ int hsh(shell_info_t *shell_info, char **argv)
 
 	while (res != -1 && built_in_r != -2)
 	{
-		init_shedata(shell_info);
+		clr_shedata(shell_info);
 		if (is_interactive(shell_info))
 			_puts("$ ");
 		error_putchar(FLUSH_BUFFER);
-		res = get_cmd(shell_info);
+		res = _getinpu(shell_info);
 		if (res != -1)
 		{
 			config_data(shell_info, argv);
@@ -37,9 +37,9 @@ int hsh(shell_info_t *shell_info, char **argv)
 		exit(shell_info->last_status);
 	if (built_in_r == -2)
 	{
-		if (shell_info->exit_code == -1)
+		if (shell_info->errexit_code == -1)
 			exit(shell_info->last_status);
-		exit(shell_info->exit_code);
+		exit(shell_info->errexit_code);
 	}
 	return (built_in_r);
 }
@@ -57,7 +57,7 @@ int hsh(shell_info_t *shell_info, char **argv)
 int find_built_in(shell_info_t *shell_info)
 {
 	int k, built_in_r = -1;
-	builtin_t btintbl[] = {
+	builtin_table btintbl[] = {
 		{"exit", simshell_exit},
 		{"env", output_envir},
 		{"help", simshell_help},
@@ -70,12 +70,14 @@ int find_built_in(shell_info_t *shell_info)
 	};
 
 	for (k = 0; btintbl[k].command; k++)
+	{
 		if (_str_cmp(shell_info->args[0], btintbl[k].command) == 0)
 		{
-			shell_info->exec_count++;
+			shell_info->execline_count++;
 			built_in_r = btintbl[k].func(shell_info);
 			break;
 		}
+	}
 	return (built_in_r);
 }
 
