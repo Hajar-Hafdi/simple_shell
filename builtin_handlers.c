@@ -7,7 +7,7 @@
  *
  * Return: 0 if shell_inf->arg[0] != "exit"
  */
-int simshell_exit(shell_info_t *shell_info)
+int simshell_exit(shellinfo_t *shell_info)
 {
 	int exit_stcheck;
 
@@ -22,10 +22,10 @@ int simshell_exit(shell_info_t *shell_info)
 			error_putchar('\n');
 			return (1);
 		}
-		shell_info->exit_code = exit_stcheck;
+		shell_info->errexit_code = error_atoi(shell_info->args[1]);
 		return (-2);
 	}
-	shell_info->exit_code = -1;
+	shell_info->errexit_code = -1;
 	return (-2);
 }
 /**
@@ -37,14 +37,42 @@ int simshell_exit(shell_info_t *shell_info)
  */
 int shell_curdir(shell_info_t *shell_info)
 {
-	char *curr_dir, *new_dir, buffer[1024];
+	char *o, drt, buffer[1024];
 	int chdir_ret;
 
-	curr_dir = getcwd(buffer, 1024);
-	if (!curr_dir)
+	o = getcwd(buffer, sizeof(buffer)1024);
+	if (!o)
 		_puts("Error: directory not found\n");
 	if (!shell_info->args[1])
 	{
+		drt = _getenv(shell_info, "HOME=");
+		if (!drt)
+			chdir_ret = chdir((drt = _getenv(shell_info, "PWD=")) ? drt : "/");
+		else
+			chdir_ret = chdir(drt);
+	}
+	else if (_strcmp(shell_info->args[1], "-") == 0)
+	{
+		if (!_getenv(shell_info, "OLDPWD="))
+		{
+			_puts(s);
+			_put_char('\n');
+			return (1);
+		}
+		_puts(_getenv(shell_info, "OLDPWD=")), _put_char('\n');
+		chdir_ret = chdir((drt = _getenv(shell_info, "OLDPWD=")) ? drt : "/");
+	}
+	else
+		chdir_ret = chdir(shell_info->args[1]);
+	if (chdir_ret == -1)
+	{
+		output_error(shell_info, "couldn't change dir to ");
+		error_puts(shell_info->args[1]), _eputchar('\n');
+	}
+	else
+	{
+
+
 		new_dir = get_envval(shell_info, "HOME=");
 		if (!new_dir)
 			new_dir = get_envval(shell_info, "PWD=");

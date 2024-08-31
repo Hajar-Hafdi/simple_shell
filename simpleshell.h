@@ -114,7 +114,6 @@ typedef struct builtin
 
 
 
-void _putchar(char c);
 /* buff_input.c */
 ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen);
 
@@ -125,16 +124,15 @@ int shell_curdir(shellinfo_t *shell_info);
 int simshell_help(shellinfo_t *shell_info);
 
 /* command_chaining.c */
-int replace_string(char **prev_str, char *curr_str);
+int change_string(char **prev_str, char *curr_str);
 int change_vars(shell_nfo_t *inf);
 int change_aliases(shellinfo_t *inf);
-void handle_cmd_chain(shellinfo_t *inf, char *buff, size_t *indx,
-size_t strt, size_t buf_l);
+void chk_cmd_chain(shellinfo_t *inf, char *buff, size_t *indx, size_t strt, size_t buf_l);
 int cmd_chain(shellinfo_t *shell_info, char *buff, size_t *pos);
 
 /*  data.c */
 
-void init_shedata(shellinfo_t *sdata);
+void clr_shedata(shellinfo_t *sdata);
 void config_data(shellinfo_t *sdata, char **argvec);
 void release_shdata(shellinfo_t *shell_info, int freeall);
 
@@ -156,25 +154,20 @@ int assign_env(shellinfo_t *shell_data, char *envi_vari, char *env_val);
 /* file_io_helpers.c */
 
 char *retrieve_hist(shellinfo_t *sdata);
-int preserve_hist(shellinfo_t *sdata);
-int scan_hist(shellinfo_t *sdata);
+int w_hist(shellinfo_t *sdata);
+int r_hist(shellinfo_t *sdata);
 int add_to_history(shellinfo_t *sdata, char *buff, int linec);
-int update_history_num(shellinfo_t *sdata);
+int updhistory_num(shellinfo_t *sdata);
 
-/* get_cmd_read.c */
-ssize_t get_cmd(shellinfo_t *sdata);
-ssize_t read_bf(shellinfo_t *sdata, char *screen, size_t *sze);
+/* get_ln.c */
+ssize_t _getinpu(shellinfo_t *sdata);
+int gt_(shellinfo_t *sdata, char **screen, size_t *sze);
+void sigint(int dt);
 
-/* _get_line.c */
-int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng);
-void handle_sigint(__attribute__((unused))int signum);
 
 /* more_builtin_handlers.c */
 int display_history(shellinfo_t *shell_info);
-int erase_alias(shellinfo_t *shell_info, char *alias_string);
-int allot_alias(shellinfo_t *shell_info, char *alias_string);
 int output_alias(listitem_t *alias_n);
-int sshell_alias(shellinfo_t *shell_info);
 
 /* string_list.c */
 
@@ -182,7 +175,7 @@ list_item_t *appnd_nd(list_item_t **hd, const char *string, int ber);
 list_item_t *app_ndend(list_item_t **hd, const char *string, int ber);
 size_t output_lisval(const list_item_t *hd);
 int remove_nd_idx(list_item_t **hd, unsigned int idx);
-void open_list(list_item_t **hd_p);
+void libre_list(list_item_t **hd_p);
 
 /*  string_list2.c */
 
@@ -247,7 +240,5 @@ int find_built_in(shellinfo_t *shell_info);
 void find_command(shellinfo_t *shell_info);
 void fork_command(shellinfo_t *shell_info);
 
-
-list_item_t *find_node_with_prefix(list_item_t *nd, char *prfx, char r);
 
 #endif
