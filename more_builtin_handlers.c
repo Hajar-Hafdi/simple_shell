@@ -11,8 +11,6 @@
  */
 int display_history(shell_info_t *shell_info)
 {
-	if (!shell_info || !shell_info->cmd_history)
-		return (1);
 	output_list(shell_info->cmd_history);
 	return (0);
 }
@@ -26,18 +24,18 @@ int display_history(shell_info_t *shell_info)
  */
 int erase_alias(shell_info_t *shell_info, char *alias_string)
 {
-	char *alias_pos, alias_char;
+	char *sign, tempp;
 	int outcome;
 
-	alias_pos = strchr(alias_string, '=');
-	if (!alias_pos)
+	sign = _str_chr(alias_string, '=');
+	if (!sign)
 		return (1);
-	alias_char = *alias_pos;
-	*alias_pos = '\0';
+	tempp = *sign;
+	*sign = '\0';
 	outcome = remove_nd_idx(&(shell_info->aliases),
 			aqu_nd_indx(shell_info->aliases,
 				nd_begin_with(shell_info->aliases, alias_string, -1)));
-	*alias_pos = alias_char;
+	*sign = tempp;
 	return (outcome);
 }
 /**
@@ -50,13 +48,14 @@ int erase_alias(shell_info_t *shell_info, char *alias_string)
  */
 int allot_alias(shell_info_t *shell_info, char *alias_string)
 {
-	char *alias_p;
+	char *signn;
 
-	alias_p = strchr(alias_string, '=');
-	if (!alias_p)
+	signn = _str_chr(alias_string, '=');
+	if (!signn)
 		return (1);
-	if (!*++alias_p)
-		return (allot_alias(shell_info, alias_string));
+	if (!*++signn)
+		 return (erase_alias(shell_info, alias_string));
+	erase_alias(shell_info, alias_string);
 	return (app_ndend(&(shell_info->aliases), alias_string, 0) == NULL);
 }
 /**
@@ -68,16 +67,16 @@ int allot_alias(shell_info_t *shell_info, char *alias_string)
  */
 int output_alias(list_item_t *alias_n)
 {
-	char *alias_p = NULL, *alias_string = NULL;
+	char *siign = NULL, *astring = NULL;
 
 	if (alias_n)
 	{
-		alias_p = strchr(alias_n->value, '=');
-		for (alias_string = alias_n->value; alias_string <= alias_p; alias_string++)
-			putchar(*alias_string);
-		putchar('\'');
-		puts(alias_p + 1);
-		puts("\n");
+		siign = _str_chr(alias_n->value, '=');
+		for (astring = alias_n->value; astring <= siign; astring++)
+			_put_char(*astring);
+		_put_char('\'');
+		_puts(siign + 1);
+		_puts("'\n");
 		return (0);
 	}
 	return (1);
@@ -92,7 +91,7 @@ int output_alias(list_item_t *alias_n)
 int sshell_alias(shell_info_t *shell_info)
 {
 	int u = 0;
-	char *alias_p = NULL;
+	char *ssign = NULL;
 	list_item_t *alias_n = NULL;
 
 	if (shell_info->arg_count == 1)
@@ -107,8 +106,8 @@ int sshell_alias(shell_info_t *shell_info)
 	}
 	for (u = 1; shell_info->args[u]; u++)
 	{
-		alias_p = strchr(shell_info->args[u], '=');
-		if (alias_p)
+		ssign = _str_chr(shell_info->args[u], '=');
+		if (ssign)
 			allot_alias(shell_info, shell_info->args[u]);
 		else
 			output_alias(nd_begin_with(shell_info->aliases,
