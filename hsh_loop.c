@@ -8,7 +8,7 @@
  * Return: 0 on success, 1 on error, or a specific error code
  */
 
-int hsh(shell_info_t *shell_info, char **argv)
+int hsh(shellinfo_t *shell_info, char **argv)
 {
 	ssize_t res = 0;
 	int built_in_r = 0;
@@ -54,7 +54,7 @@ int hsh(shell_info_t *shell_info, char **argv)
  *          1 if execution fails,
  *          -2 if builtin triggers an exit signal
  */
-int find_built_in(shell_info_t *shell_info)
+int find_built_in(shellinfo_t *shell_info)
 {
 	int k, built_in_r = -1;
 	builtin_table btintbl[] = {
@@ -88,7 +88,7 @@ int find_built_in(shell_info_t *shell_info)
  * Return: void
  */
 
-void find_command(shell_info_t *shell_info)
+void find_command(shellinfo_t *shell_info)
 {
 	char *c_path = NULL;
 	int a, b;
@@ -132,7 +132,7 @@ void find_command(shell_info_t *shell_info)
  *
  * Return: void
  */
-void fork_command(shell_info_t *shell_info)
+void fork_command(shellinfo_t *shell_info)
 {
 	pid_t pid_child;
 
