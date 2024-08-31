@@ -37,7 +37,7 @@ char *convert_num(long int n, int base, int flags)
 }
 
 /**
- * remove_comm - replaces first instance of '#' with '\0'
+ * remove_comm - replaces the first instance of '#' with '\0'
  * @buffer: address of the string to modify
  *
  * Return: Always 0;
