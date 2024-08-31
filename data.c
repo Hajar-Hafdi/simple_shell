@@ -1,11 +1,11 @@
 #include "simpleshell.h"
 
 /**
- * init_shedata - initializes shell_info_t strct
+ * clr_shedata - initializes shellinfo_t strct
  *
- * @sdata: ptr to the shell_info_t struct
+ * @sdata: ptr to the shellinfo_t struct
  */
-void init_shedata(shell_info_t *sdata)
+void clr_shedata(shellinfo_t *sdata)
 {
 	sdata->input = NULL;
 	sdata->args = NULL;
@@ -13,12 +13,12 @@ void init_shedata(shell_info_t *sdata)
 	sdata->arg_count = 0;
 }
 /**
- * config_data - sets up the shell_info_t struct
+ * config_data - sets up the shellinfo_t struct
  *
- * @sdata: ptr to the shell_info_t strct
+ * @sdata: ptr to the shellinfo_t strct
  * @argvec: arg vector
  */
-void config_data(shell_info_t *sdata, char **argvec)
+void config_data(shellinfo_t *sdata, char **argvec)
 {
 	int u = 0;
 
@@ -43,12 +43,12 @@ void config_data(shell_info_t *sdata, char **argvec)
 	}
 }
 /**
- * release_shdata - releases memory for fields in shell_info_t strct
+ * release_shdata - releases memory for fields in shellinfo_t strct
  *
- * @shell_info: ptr to the shell_info_t struct
+ * @shell_info: ptr to the shellinfo_t struct
  * @freeall: flag thet indicates whether to free all fields
  */
-void release_shdata(shell_info_t *shell_info, int freeall)
+void release_shdata(shellinfo_t *shell_info, int freeall)
 {
 	f_free(shell_info->args);
 	shell_info->args = NULL;
@@ -59,16 +59,16 @@ void release_shdata(shell_info_t *shell_info, int freeall)
 		if (!shell_info->buffer)
 			free(shell_info->input);
 		if (shell_info->env_list)
-			open_list(&(shell_info->env_list));
+			libre_list(&(shell_info->env_list));
 		if (shell_info->cmd_history)
-			open_list(&(shell_info->cmd_history));
+			libre_list(&(shell_info->cmd_history));
 		if (shell_info->aliases)
-			open_list(&(shell_info->aliases));
+			libre_list(&(shell_info->aliases));
 		f_free(shell_info->env_array);
 		shell_info->env_array = NULL;
 		b_free((void **)shell_info->buffer);
 		if (shell_info->input_fd > 2)
 			close(shell_info->input_fd);
-		_puts_filed("", FLUSH_BUFFER);
+		_put_char(FLUSH_BUFFER);
 	}
 }
