@@ -13,7 +13,7 @@ int display_history(shell_info_t *shell_info)
 {
 	if (!shell_info || !shell_info->cmd_history)
 		return (1);
-	print_list(shell_info->cmd_history);
+	output_list(shell_info->cmd_history);
 	return (0);
 }
 /**

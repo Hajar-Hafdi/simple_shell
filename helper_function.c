@@ -63,7 +63,7 @@ void output_error(shell_info_t *shell_info, char *estr)
 {
 	error_puts(shell_info->program_name);
 	error_puts(": ");
-	print_d(shell_info->exec_count, STDERR_FILENO);
+	print_decimal(shell_info->exec_count, STDERR_FILENO);
 	error_puts(": ");
 	error_puts(shell_info->args[0]);
 	error_puts(": ");

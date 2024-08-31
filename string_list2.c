@@ -67,8 +67,8 @@ size_t output_list(const list_item_t *hd)
 	while (hd)
 	{
 		_puts(convert_num(hd->number, 10, 0));
-		putchar(':');
-		putchar(' ');
+		_put_char(':');
+		_put_char(' ');
 		_puts(hd->value ? hd->value : "(nil)");
 		_puts("\n");
 		hd = hd->next;
@@ -85,7 +85,7 @@ size_t output_list(const list_item_t *hd)
  *
  * Return: returns nd or NULL
  */
-list_item_t *nd_begin_with(list_item_t *nd, char prfx, char r)
+list_item_t *nd_begin_with(list_item_t *nd, char *prfx, char r)
 {
 	char *a = NULL;
 

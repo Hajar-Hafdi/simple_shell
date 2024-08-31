@@ -103,7 +103,7 @@ void find_command(shell_info_t *shell_info)
 	if (!b)
 		return;
 
-	c_path = find_path(shell_info, get_envval(shell_info, "PATH="),
+	c_path = search_path(shell_info, get_envval(shell_info, "PATH="),
 		shell_info->args[0]);
 	if (c_path)
 	{
@@ -144,7 +144,7 @@ void fork_command(shell_info_t *shell_info)
 	if (pid_child == 0)
 	{
 		if (execve(shell_info->current_path, shell_info->args,
-			release_shdata(shell_info)) == -1)
+			fetch_env(shell_info)) == -1)
 		{
 			release_shdata(shell_info, 1);
 			if (errno == EACCES)
