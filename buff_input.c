@@ -14,7 +14,7 @@ ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 	ssize_t rd = 0;
 	size_t le = 0;
 
-	if (!bulen)
+	if (!buff || !*buff)
 	{
 		free(*buff);
 		*buff = NULL;

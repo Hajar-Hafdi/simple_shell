@@ -43,13 +43,13 @@ int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng)
 	return (t);
 }
 /**
- * handle_sigint - handles the SIGINT signal
+ * sigint - handles the SIGINT signal
  *
- * @signum: the signal num
+ * @dt: the signal num
  *
  * Return: void
  */
-void handle_sigint(__attribute__((unused))int signum)
+void sigint(__attribute__((unused))int dt)
 {
 	_puts("\n");
 	_puts("$ ");
