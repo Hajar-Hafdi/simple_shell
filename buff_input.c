@@ -12,7 +12,7 @@
 ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 {
 	ssize_t rd = 0;
-	size_t lentm = 0;
+	size_t le = 0;
 
 	if (!bulen)
 	{
@@ -20,9 +20,9 @@ ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 		*buff = NULL;
 	signal(SIGINT, sigint);
 #if USE_SYSTEM_GETLINE
-	rd = gt_(sdata, buff, &lentm);
+	rd = gt_(sdata, buff, &le);
 #else
-	rd = _gtinpu(sdata);
+	rd = _getinpu(sdata);
 #endif
 	if (rd > 0)
 	{

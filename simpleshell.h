@@ -54,7 +54,7 @@ typedef struct list_item
 
 
 /**
- * struct shell_info - stores information needed for command execution
+ * struct shellinfo - stores information needed for command execution
  *                     within a simple shell prog
  * @input:          the raw input string from the user.
  * @args:           the parsed array of args taken from input
@@ -187,7 +187,7 @@ size_t output_list(const list_item_t *hd);
 list_item_t *nd_begin_with(list_item_t *nd, char *prfx, char r);
 ssize_t aqu_nd_indx(list_item_t *hd, list_item_t *nd);
 
-int is_interactive(shell_info_t *info);
+int is_interactive(shellinfo_t *info);
 /* shell_strings.c*/
 void _puts(char *string);
 int _put_char(char ch);
@@ -237,7 +237,7 @@ char *dup_character(char *pathstr, int start, int stop);
 char *search_path(shellinfo_t *shell_info, char *pathst, char *cmd);
 
 /*hsh_loop.c */
-int hsh(shell_info_t *shell_info, char **argv);
+int hsh(shellinfo_t *shell_info, char **argv);
 int find_built_in(shellinfo_t *shell_info);
 void find_command(shellinfo_t *shell_info);
 void fork_command(shellinfo_t *shell_info);

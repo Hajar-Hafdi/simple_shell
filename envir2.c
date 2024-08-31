@@ -34,7 +34,7 @@ int unset_envir(shellinfo_t *shell_data, char *envi_var)
 		return (0);
 	while (node)
 	{
-		b = start_with(nod->value, envi_var);
+		b = start_with(node->value, envi_var);
 		if (b && *b == '=')
 		{
 			shell_data->env_modified = remove_nd_idx(

@@ -46,7 +46,7 @@ int w_hist(shellinfo_t *sdata)
 	for (node = sdata->cmd_history; node; node = node->next)
 	{
 		_puts_filed(node->value, filed);
-		_puts_char('\n');
+		_put_char('\n');
 	}
 	_put_char(FLUSH_BUFFER);
 	close(filed);
@@ -133,7 +133,7 @@ int add_to_history(shellinfo_t *sdata, char *buff, int linec)
  *
  * Return: returns new hist count
  */
-int update_history_num(shellinfo_t *sdata)
+int updhistory_num(shellinfo_t *sdata)
 {
 	list_item_t *nod = sdata->cmd_history;
 	int u = 0;

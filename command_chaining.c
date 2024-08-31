@@ -85,7 +85,7 @@ int change_aliases(shellinfo_t *inf)
 		e = _str_chr(nod->value, '=');
 		if (!e)
 			return (0);
-		e = _str_dup(e + 1);
+		e = _strd_up(e + 1);
 		if (!e)
 			return (0);
 		inf->args[0] = e;

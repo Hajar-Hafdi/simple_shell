@@ -45,13 +45,13 @@ int shell_curdir(shellinfo_t *shell_info)
 		_puts("Error: directory not found\n");
 	if (!shell_info->args[1])
 	{
-		drt = _getenv(shell_info, "HOME=");
+		drt = getenv(shell_info, "HOME=");
 		if (!drt)
 			chdir_ret = chdir((drt = _getenv(shell_info, "PWD=")) ? drt : "/");
 		else
 			chdir_ret = chdir(drt);
 	}
-	else if (_strcmp(shell_info->args[1], "-") == 0)
+	else if (_str_cmp(shell_info->args[1], "-") == 0)
 	{
 		if (!_getenv(shell_info, "OLDPWD="))
 		{
@@ -59,7 +59,7 @@ int shell_curdir(shellinfo_t *shell_info)
 			_put_char('\n');
 			return (1);
 		}
-		_puts(get_evval(shell_info, "OLDPWD=")), _put_char('\n');
+		_puts(get_envval(shell_info, "OLDPWD=")), _put_char('\n');
 		chdir_ret = chdir((drt = get_envval(shell_info, "OLDPWD=")) ? drt : "/");
 	}
 	else

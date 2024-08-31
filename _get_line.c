@@ -9,7 +9,7 @@
  *
  * Return: num of bytes read
  */
-int sh_gline(shell_info_t *sdata, char **pnt, size_t *lng)
+int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng)
 {
 	static char sc[READ_BUF_SIZE];
 	static size_t d, n;

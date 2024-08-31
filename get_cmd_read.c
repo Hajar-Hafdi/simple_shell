@@ -26,7 +26,7 @@ ssize_t _getinpu(shellinfo_t *sdata)
 		chk_cmd_chain(sdata, bff, &k, u, lng);
 		while (k < lng)
 		{
-			if (is_chain(sdata, bff, &k))
+			if (cmd_chain(sdata, bff, &k))
 				break;
 			k++;
 		}
