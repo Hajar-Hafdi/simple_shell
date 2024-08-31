@@ -29,9 +29,9 @@ void _puts(char *string)
 int _put_char(char ch)
 {
 	static int num;
-	static char buffer[OUTPUT_BUFFER_SIZE];
+	static char buffer[WRITE_BUFFER_SIZE];
 
-	if (ch == FLUSH_BUFFER || num >= OUTPUT_BUFFER_SIZE)
+	if (ch == FLUSH_BUFFER || num >= WRITE_BUFFER_SIZE)
 	{
 		write(1, buffer, num);
 		num = 0;
