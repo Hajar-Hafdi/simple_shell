@@ -164,6 +164,8 @@ int gt_(shellinfo_t *sdata, char **screen, size_t *sze);
 void sigint(int dt);
 ssize_t r_bufff(shellinfo_t *sdata, char *screen, size_t *sze);
 
+int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng);
+
 /* more_builtin_handlers.c */
 int display_history(shellinfo_t *shell_info);
 int erase_alias(shellinfo_t *shell_info, char *alias_string);
