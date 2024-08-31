@@ -120,7 +120,7 @@ int change_vars(shell_info_t *inf)
 					_strd_up(convert_num(getpid(), 10, 0)));
 			continue;
 		}
-		nod = find_node_with_prefix(inf->env_list, inf->args[u] + 1, '=');
+		nod = nd_begin_with(inf->env_list, inf->args[u] + 1, '=');
 		if (nod)
 		{
 			replace_string(&(inf->args[u]),

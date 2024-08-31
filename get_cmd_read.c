@@ -12,9 +12,10 @@ ssize_t get_cmd(shell_info_t *sdata)
 	static char *bff;
 	static size_t u, k, lng;
 	ssize_t bread = 0;
-	char **arg_p = &(sdata->args), *pntr;
+	char *pntr;
+	char **arg_p = sdata->buffer;
 
-	_putchar(FLUSH_BUFFER);
+	_put_char(FLUSH_BUFFER);
 	bread = buff_input(sdata, &bff, &lng);
 	if (bread == -1)
 		return (-1);

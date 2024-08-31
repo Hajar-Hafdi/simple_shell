@@ -53,5 +53,5 @@ void handle_sigint(__attribute__((unused))int signum)
 {
 	_puts("\n");
 	_puts("$ ");
-	_putchar(FLUSH_BUFFER);
+	_put_char(FLUSH_BUFFER);
 }
