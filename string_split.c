@@ -4,7 +4,7 @@
  * Repeat delimiters are ignored
  * @string: the input string
  * @delim: the delimiter string
- * Return: a pointer to an array of strings, NULL on failure
+ * Return: a pointer to an array of strings, and NULL on failure
  */
 char **split_string(char *string, char *delim)
 {
