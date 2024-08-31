@@ -53,7 +53,7 @@ char *_strd_up(const char *string)
  * @str2: the second string
  *
  * Return: positive if str1 > str2, zero if str1 == str2,
- * negative if str1 < str2
+ * and negative if str1 < str2
  */
 int _str_cmp(char *str1, char *str2)
 {
