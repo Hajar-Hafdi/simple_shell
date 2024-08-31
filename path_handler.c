@@ -7,7 +7,7 @@
  *
  * Return: return 1 if true, or 0 otherwise
  */
-int is_executable(shell_info_t *shell_info, char *path)
+int is_executable(shellinfo_t *shell_info, char *path)
 {
 	struct stat fl_stat;
 
@@ -51,7 +51,7 @@ char *dup_character(char *pathstr, int start, int stop)
  *
  * Return: full path of cmd if found or NULL
  */
-char *search_path(shell_info_t *shell_info, char *pathst, char *cmd)
+char *search_path(shellinfo_t *shell_info, char *pathst, char *cmd)
 {
 	int len = 0, current_pos = 0;
 	char *path;
