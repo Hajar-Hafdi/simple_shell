@@ -48,8 +48,8 @@ int preserve_hist(shell_info_t *sdata)
 		_puts_filed(nod->value, filed);
 		_put_filed("\n", filed);
 	}
-	_put_filed(FLUSH_BUFFER, filed);
-	close(filed);
+	_put_filed("", filed);
+
 	return (1);
 }
 /**
@@ -66,7 +66,7 @@ int scan_hist(shell_info_t *sdata)
 	struct stat st;
 	char *buff = NULL, *filenm = retrieve_hist(sdata);
 
-	if (!filenm == NULL)
+	if (filenm == NULL)
 		return (1);
 	filed = open(filenm, O_RDONLY);
 	free(filenm);
