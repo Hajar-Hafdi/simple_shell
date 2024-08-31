@@ -34,12 +34,12 @@ int is_executable(shell_info_t *shell_info, char *path)
 char *dup_character(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int i = 0, k = 0;
+	int index = 0, len = 0;
 
-	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
-	buf[k] = 0;
+	for (len = 0, index = start; index < stop; index++)
+		if (pathstr[index] != ':')
+			buf[len++] = pathstr[index];
+	buf[len] = 0;
 	return (buf);
 }
 
@@ -53,7 +53,7 @@ char *dup_character(char *pathstr, int start, int stop)
  */
 char *search_path(shell_info_t *shell_info, char *pathst, char *cmd)
 {
-	int k = 0, current_pos = 0;
+	int len = 0, current_pos = 0;
 	char *path;
 
 	if (!pathst)
@@ -65,9 +65,9 @@ char *search_path(shell_info_t *shell_info, char *pathst, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathst[k] || pathst[k] == ':')
+		if (!pathst[len] || pathst[len] == ':')
 		{
-			path = dup_character(pathst, current_pos, k);
+			path = dup_character(pathst, current_pos, len);
 			if (!*path)
 				_str_cat(path, cmd);
 			else
@@ -77,11 +77,11 @@ char *search_path(shell_info_t *shell_info, char *pathst, char *cmd)
 			}
 			if (is_executable(shell_info, path))
 				return (path);
-			if (!pathst[k])
+			if (!pathst[len])
 				break;
-			current_pos = k;
+			current_pos = len;
 		}
-		k++;
+		len++;
 	}
 	return (NULL);
 }
