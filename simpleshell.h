@@ -95,7 +95,7 @@ typedef struct shellinfo
 	int buffer_type;
 	int input_fd;
 	int history_count;
-} shell_info_t;
+} shellinfo_t;
 
 #define  INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
@@ -116,65 +116,65 @@ typedef struct builtin
 
 void _putchar(char c);
 /* buff_input.c */
-ssize_t buff_input(shell_info_t *sdata, char **buff, size_t *bulen);
+ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen);
 
 
 /* builtin_handlers.c */
-int simshell_exit(shell_info_t *shell_info);
-int shell_curdir(shell_info_t *shell_info);
-int simshell_help(shell_info_t *shell_info);
+int simshell_exit(shellinfo_t *shell_info);
+int shell_curdir(shellinfo_t *shell_info);
+int simshell_help(shellinfo_t *shell_info);
 
 /* command_chaining.c */
 int replace_string(char **prev_str, char *curr_str);
-int change_vars(shell_info_t *inf);
-int change_aliases(shell_info_t *inf);
-void handle_cmd_chain(shell_info_t *inf, char *buff, size_t *indx,
+int change_vars(shell_nfo_t *inf);
+int change_aliases(shellinfo_t *inf);
+void handle_cmd_chain(shellinfo_t *inf, char *buff, size_t *indx,
 size_t strt, size_t buf_l);
-int cmd_chain(shell_info_t *shell_info, char *buff, size_t *pos);
+int cmd_chain(shellinfo_t *shell_info, char *buff, size_t *pos);
 
 /*  data.c */
 
-void init_shedata(shell_info_t *sdata);
-void config_data(shell_info_t *sdata, char **argvec);
-void release_shdata(shell_info_t *shell_info, int freeall);
+void init_shedata(shellinfo_t *sdata);
+void config_data(shellinfo_t *sdata, char **argvec);
+void release_shdata(shellinfo_t *shell_info, int freeall);
 
 /* simshell_main.c */
 int main(int arg_cnt, char **arg_val);
 
 /* envir.c */
-int output_envir(shell_info_t *shell_info);
-char *get_envval(shell_info_t *shell_info, const char *varbl_name);
-int set_enviro_var(shell_info_t *shell_info);
-int remove_env_var(shell_info_t *shell_info);
-int pop_envlist(shell_info_t *shell_info);
+int output_envir(shellinfo_t *shell_info);
+char *get_envval(shellinfo_t *shell_info, const char *varbl_name);
+int set_enviro_var(shellinfo_t *shell_info);
+int remove_env_var(shellinfo_t *shell_info);
+int pop_envlist(shellinfo_t *shell_info);
 
 /* envir2.c */
-char **fetch_env(shell_info_t *shell_data);
-int unset_envir(shell_info_t *shell_data, char *envi_var);
-int assign_env(shell_info_t *shell_data, char *envi_vari, char *env_val);
+char **fetch_env(shellinfo_t *shell_data);
+int unset_envir(shellinfo_t *shell_data, char *envi_var);
+int assign_env(shellinfo_t *shell_data, char *envi_vari, char *env_val);
 
 /* file_io_helpers.c */
 
-char *retrieve_hist(shell_info_t *sdata);
-int preserve_hist(shell_info_t *sdata);
-int scan_hist(shell_info_t *sdata);
-int add_to_history(shell_info_t *sdata, char *buff, int linec);
-int update_history_num(shell_info_t *sdata);
+char *retrieve_hist(shellinfo_t *sdata);
+int preserve_hist(shellinfo_t *sdata);
+int scan_hist(shellinfo_t *sdata);
+int add_to_history(shellinfo_t *sdata, char *buff, int linec);
+int update_history_num(shellinfo_t *sdata);
 
 /* get_cmd_read.c */
-ssize_t get_cmd(shell_info_t *sdata);
-ssize_t read_bf(shell_info_t *sdata, char *screen, size_t *sze);
+ssize_t get_cmd(shellinfo_t *sdata);
+ssize_t read_bf(shellinfo_t *sdata, char *screen, size_t *sze);
 
 /* _get_line.c */
-int sh_gline(shell_info_t *sdata, char **pnt, size_t *lng);
+int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng);
 void handle_sigint(__attribute__((unused))int signum);
 
 /* more_builtin_handlers.c */
-int display_history(shell_info_t *shell_info);
-int erase_alias(shell_info_t *shell_info, char *alias_string);
-int allot_alias(shell_info_t *shell_info, char *alias_string);
-int output_alias(list_item_t *alias_n);
-int sshell_alias(shell_info_t *shell_info);
+int display_history(shellinfo_t *shell_info);
+int erase_alias(shellinfo_t *shell_info, char *alias_string);
+int allot_alias(shellinfo_t *shell_info, char *alias_string);
+int output_alias(listitem_t *alias_n);
+int sshell_alias(shellinfo_t *shell_info);
 
 /* string_list.c */
 
@@ -214,10 +214,10 @@ char *_str_chr(char *str, char ch);
 char **split_string(char *string, char *delim);
 
 /* helper_function.c */
-int is_interactive(shell_info_t *shell_info);
+int is_interactive(shellinfo_t *shell_info);
 int is_delimeter(char c, char *d);
 int error_atoi(const char *str);
-void output_error(shell_info_t *shell_info, char *estr);
+void output_error(shellinfo_t *shell_info, char *estr);
 int print_decimal(int input, int filed);
 
 /* handle_errors.c */
@@ -237,15 +237,15 @@ void *_re_allocate(void *pointer, unsigned int old_s, unsigned int new_s);
 int b_free(void **p);
 
 /* path_handler.c */
-int is_executable(shell_info_t *shell_info, char *path);
+int is_executable(shellinfo_t *shell_info, char *path);
 char *dup_character(char *pathstr, int start, int stop);
-char *search_path(shell_info_t *shell_info, char *pathst, char *cmd);
+char *search_path(shellinfo_t *shell_info, char *pathst, char *cmd);
 
 /*hsh_loop.c */
 int hsh(shell_info_t *shell_info, char **argv);
-int find_built_in(shell_info_t *shell_info);
-void find_command(shell_info_t *shell_info);
-void fork_command(shell_info_t *shell_info);
+int find_built_in(shellinfo_t *shell_info);
+void find_command(shellinfo_t *shell_info);
+void fork_command(shellinfo_t *shell_info);
 
 
 list_item_t *find_node_with_prefix(list_item_t *nd, char *prfx, char r);
