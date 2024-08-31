@@ -20,9 +20,9 @@ ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 		*buff = NULL;
 	signal(SIGINT, sigint);
 #if USE_SYSTEM_GETLINE
-	rd = gt_(sdata, buff, &le);
+	rd = sh_gline(sdata, buff, stdin);
 #else
-	rd = _getinpu(sdata);
+	rd = sh_gline(sdata, buff, &le);
 #endif
 	if (rd > 0)
 	{
