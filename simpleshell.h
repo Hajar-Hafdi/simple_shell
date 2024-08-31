@@ -167,7 +167,10 @@ void sigint(int dt);
 
 /* more_builtin_handlers.c */
 int display_history(shellinfo_t *shell_info);
+int erase_alias(shell_info_t *shell_info, char *alias_string);
+int allot_alias(shell_info_t *shell_info, char *alias_string);
 int output_alias(listitem_t *alias_n);
+int sshell_alias(shell_info_t *shell_info);
 
 /* string_list.c */
 
