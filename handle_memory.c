@@ -33,7 +33,7 @@ void f_free(char **ptr)
 
 /**
  * _re_allocate - reallocates a block of memory
- * @pointer: pointer to previous malloc'ated block
+ * @pointer: pointer to previous malloc'ed block
  * @old_s: byte size of the previous block
  * @new_s: byte size of the new block
  *
