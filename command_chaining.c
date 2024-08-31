@@ -9,19 +9,19 @@
  *
  * Return: 1 if chain del, 1 if not
  */
-int cmd_chain(shell_info_t *shell_info, char *buff, size_t *pos)
+int cmd_chain(shellinfo_t *shell_info, char *buff, size_t *pos)
 {
 	size_t indx = *pos;
 
 	if (buff[indx] == '|' && buff[indx + 1] == '|')
 	{
-		buff[indx] = '\0';
+		buff[indx] = 0;
 		indx++;
 		shell_info->buffer_type = CHAIN_OR;
 	}
-	else if (buff[indx] == ';')
+	else if (buff[indx] == '&' && buff[indx + 1] == '&')
 	{
-		buff[indx] = '\0';
+		buff[indx] = 0;
 		shell_info->buffer_type = CHAIN_NORMAL;
 	}
 	else
@@ -30,7 +30,7 @@ int cmd_chain(shell_info_t *shell_info, char *buff, size_t *pos)
 	return (1);
 }
 /**
- * handle_cmd_chain - handles coms chaining based on the last status
+ * chk_cmd_chain - handles coms chaining based on the last status
  *
  * @inf: ptr to shell information structure
  * @buff: char buff
@@ -40,28 +40,28 @@ int cmd_chain(shell_info_t *shell_info, char *buff, size_t *pos)
  *
  * Return: void
  */
-void handle_cmd_chain(shell_info_t *inf, char *buff, size_t *indx,
+void chk_cmd_chain(shellinfo_t *inf, char *buff, size_t *indx,
 		size_t strt, size_t buf_l)
 {
-	size_t pos = *indx;
+	size_t s = *indx;
 
 	if (inf->buffer_type == CHAIN_AND)
 	{
 		if (inf->last_status)
 		{
 			buff[strt] = '\0';
-			pos = buf_l;
+			s = buf_l;
 		}
 	}
-	else if (inf->buffer_type == CHAIN_OR)
+	if (inf->buffer_type == CHAIN_OR)
 	{
 		if (!inf->last_status)
 		{
 			buff[strt] = '\0';
-			pos = buf_l;
+			s = buf_l;
 		}
 	}
-	*indx = pos;
+	*indx = s;
 }
 /**
  * change_aliases - replaces aliases in the tokenized string
@@ -70,11 +70,11 @@ void handle_cmd_chain(shell_info_t *inf, char *buff, size_t *indx,
  *
  * Return: 1 if succesfully replaced, 0 if not
  */
-int change_aliases(shell_info_t *inf)
+int change_aliases(shellinfo_t *inf)
 {
 	int u;
 	list_item_t *nod;
-	char *equals_s;
+	char *e;
 
 	for (u = 0; u < 10; u++)
 	{
@@ -82,13 +82,13 @@ int change_aliases(shell_info_t *inf)
 		if (!nod)
 			return (0);
 		free(inf->args[0]);
-		equals_s = strchr(nod->value, '=');
-		if (!equals_s)
+		e = _str_chr(nod->value, '=');
+		if (!e)
 			return (0);
-		equals_s = strdup(equals_s + 1);
-		if (!equals_s)
+		e = _str_dup(e + 1);
+		if (!e)
 			return (0);
-		inf->args[0] = equals_s;
+		inf->args[0] = e;
 	}
 	return (1);
 }
@@ -99,7 +99,7 @@ int change_aliases(shell_info_t *inf)
  *
  * Return: 1 if succesfully change, 0 if not
  */
-int change_vars(shell_info_t *inf)
+int change_vars(shellinfo_t *inf)
 {
 	int u = 0;
 	list_item_t *nod;
@@ -108,38 +108,38 @@ int change_vars(shell_info_t *inf)
 	{
 		if (inf->args[u][0] != '$' || !inf->args[u][1])
 			continue;
-		if (!strcmp(inf->args[u], "$?"))
+		if (!_str_cmp(inf->args[u], "$?"))
 		{
-			replace_string(&(inf->args[u]),
-					_strd_up(convert_num(inf->exit_code, 10, 0)));
+			change_string(&(inf->args[u]),
+					_strd_up(convert_num(inf->last_status, 10, 0)));
 			continue;
 		}
-		if (!strcmp(inf->args[u], "$$"))
+		if (!_str_cmp(inf->args[u], "$$"))
 		{
-			replace_string(&(inf->args[u]),
+			change_string(&(inf->args[u]),
 					_strd_up(convert_num(getpid(), 10, 0)));
 			continue;
 		}
-		nod = nd_begin_with(inf->env_list, inf->args[u] + 1, '=');
+		nod = nd_begin_with(inf->env_list, &inf->args[u][1], '=');
 		if (nod)
 		{
-			replace_string(&(inf->args[u]),
+			change_string(&(inf->args[u]),
 					_strd_up(strchr(nod->value, '=') + 1));
 			continue;
 		}
-		replace_string(&inf->args[u], strdup(""));
+		change_string(&inf->args[u], strdup(""));
 	}
 	return (0);
 }
 /**
- * replace_string - replaces a string with a nw one
+ * change_string - replaces a string with a nw one
  *
  * @prev_str: address of the previous string
  * @curr_str: address of the current string
  *
  * Return: 1 if succesfully replaced, 0 otherwise
  */
-int replace_string(char **prev_str, char *curr_str)
+int change_string(char **prev_str, char *curr_str)
 {
 	free(*prev_str);
 	*prev_str = curr_str;
