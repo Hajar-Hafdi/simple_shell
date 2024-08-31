@@ -37,25 +37,25 @@ int simshell_exit(shellinfo_t *shell_info)
  */
 int shell_curdir(shellinfo_t *shell_info)
 {
-	char *o, drt, buffer[1024];
+	char *o, *drt, buffer[1024];
 	int chdir_ret;
 
-	o = getcwd(buffer, sizeof(buffer)1024);
+	o = getcwd(buffer, 1024);
 	if (!o)
 		_puts("Error: directory not found\n");
 	if (!shell_info->args[1])
 	{
-		drt = getenv(shell_info, "HOME=");
+		drt = get_envval(shell_info, "HOME=");
 		if (!drt)
-			chdir_ret = chdir((drt = _getenv(shell_info, "PWD=")) ? drt : "/");
+			chdir_ret = chdir((drt = get_envval(shell_info, "PWD=")) ? drt : "/");
 		else
 			chdir_ret = chdir(drt);
 	}
 	else if (_str_cmp(shell_info->args[1], "-") == 0)
 	{
-		if (!_getenv(shell_info, "OLDPWD="))
+		if (!get_envval(shell_info, "OLDPWD="))
 		{
-			_puts(s);
+			_puts(o);
 			_put_char('\n');
 			return (1);
 		}
