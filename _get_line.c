@@ -11,7 +11,7 @@
  */
 int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng)
 {
-	static char sc[READ_BUF_SIZE];
+	static char sc[READ_BUFFER_SIZE];
 	static size_t d, n;
 	size_t nlen;
 	ssize_t by_re = 0, t = 0;
@@ -22,7 +22,7 @@ int sh_gline(shellinfo_t *sdata, char **pnt, size_t *lng)
 		t = *lng;
 	if (d == n)
 		d = n = 0;
-	by_re = read_bf(sdata, sc, &n);
+	by_re = r_bufff(sdata, sc, &n);
 	if (by_re == -1 || (by_re == 0 && n == 0))
 		return (-1);
 	w = _str_chr(sc + d, '\n');

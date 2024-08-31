@@ -71,8 +71,8 @@ int shell_curdir(shellinfo_t *shell_info)
 	}
 	else
 	{
-		set_enviro_var(shell_info, "OLDPWD", get_envval(shell_info, "PWD="));
-		set_enviro_var(shell_info, "PWD", getcwd(buffer, 1024));
+		assign_env(shell_info, "OLDPWD", get_envval(shell_info, "PWD="));
+		assign_env(shell_info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
