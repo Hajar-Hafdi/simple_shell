@@ -9,32 +9,34 @@
  *
  * Return: num of bytes read
  */
-ssize_t buff_input(shell_info_t *sdata, char **buff, size_t *bulen)
+ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 {
-	ssize_t by_read = 0;
+	ssize_t rd = 0;
 	size_t lentm = 0;
 
 	if (!bulen)
-		return -1;
-	*buff = NULL;
-	signal(SIGINT, handle_sigint);
-#if USE_SYSTEM_GETLINE
-	by_read = getline(buff, &lentm, stdin);
-#else
-	by_read = sh_gline(sdata, buff, &lentm);
-#endif
-	if (by_read > 0)
 	{
-		if ((*buff)[by_read - 1] == '\n')
+		free(*buff);
+		*buff = NULL;
+	signal(SIGINT, sigint);
+#if USE_SYSTEM_GETLINE
+	rd = gt_(sdata, buff, &lentm);
+#else
+	rd = _gtinpu(sdata);
+#endif
+	if (rd > 0)
+	{
+		if ((*buff)[rd - 1] == '\n')
 		{
-			(*buff)[by_read - 1] = '\0';
-			by_read--;
+			(*buff)[rd - 1] = '\0';
+			rd--;
 		}
-		sdata->count_input = 1;
+		sdata->countflag_input = 1;
 		remove_comm(*buff);
 		add_to_history(sdata, *buff, sdata->history_count++);
-		*bulen = by_read;
+		*bulen = rd;
 		sdata->buffer = buff;
 	}
-	return (by_read);
+	}
+	return (rd);
 }
