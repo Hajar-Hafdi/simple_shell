@@ -6,7 +6,7 @@
  *
  * Return: 1 if interactive mode, 0 if not
  */
-int is_interactive(shell_info_t *shell_info)
+int is_interactive(shellinfo_t *shell_info)
 {
 	return (isatty(STDIN_FILENO) && shell_info->input_fd <= 2);
 }
@@ -59,7 +59,7 @@ int error_atoi(const char *str)
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void output_error(shell_info_t *shell_info, char *estr)
+void output_error(shellinfo_t *shell_info, char *estr)
 {
 	error_puts(shell_info->program_name);
 	error_puts(": ");
