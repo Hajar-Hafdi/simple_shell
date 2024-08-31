@@ -31,7 +31,7 @@ int hsh(shellinfo_t *shell_info, char **argv)
 			_put_char('\n');
 		release_shdata(shell_info, 0);
 	}
-	preserve_hist(shell_info);
+	w_hist(shell_info);
 	release_shdata(shell_info, 1);
 	if (!is_interactive(shell_info) && shell_info->last_status)
 		exit(shell_info->last_status);
@@ -94,10 +94,10 @@ void find_command(shellinfo_t *shell_info)
 	int a, b;
 
 	shell_info->current_path = shell_info->args[0];
-	if (shell_info->count_input == 1)
+	if (shell_info->countflag_input == 1)
 	{
-		shell_info->exec_count++;
-		shell_info->count_input = 0;
+		shell_info->execline_count++;
+		shell_info->countflag_input = 0;
 	}
 	for (a = 0, b = 0; shell_info->input[a]; a++)
 		if (!is_delimeter(shell_info->input[a], " \t\n"))

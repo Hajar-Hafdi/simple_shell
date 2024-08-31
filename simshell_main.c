@@ -32,7 +32,7 @@ int main(int arg_cnt, char **arg_val)
 		shell_info.input_fd = input_file_desc;
 	}
 	pop_envlist(&shell_info);
-	scan_hist(&shell_info);
+	r_hist(&shell_info);
 	hsh(&shell_info, arg_val);
 	return (EXIT_SUCCESS);
     /* Close the file descriptor if it's not the standard input*/
