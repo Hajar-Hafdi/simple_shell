@@ -98,8 +98,7 @@ typedef struct shellinfo
 } shellinfo_t;
 
 #define  INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0}
 
 /**
  * struct builtin - associates a builtin cmd with its function
@@ -125,7 +124,7 @@ int simshell_help(shellinfo_t *shell_info);
 
 /* command_chaining.c */
 int change_string(char **prev_str, char *curr_str);
-int change_vars(shell_nfo_t *inf);
+int change_vars(shellinfo_t *inf);
 int change_aliases(shellinfo_t *inf);
 void chk_cmd_chain(shellinfo_t *inf, char *buff, size_t *indx, size_t strt, size_t buf_l);
 int cmd_chain(shellinfo_t *shell_info, char *buff, size_t *pos);
@@ -167,10 +166,10 @@ ssize_t r_bufff(shellinfo_t *sdata, char *screen, size_t *sze);
 
 /* more_builtin_handlers.c */
 int display_history(shellinfo_t *shell_info);
-int erase_alias(shell_info_t *shell_info, char *alias_string);
-int allot_alias(shell_info_t *shell_info, char *alias_string);
-int output_alias(listitem_t *alias_n);
-int sshell_alias(shell_info_t *shell_info);
+int erase_alias(shellinfo_t *shell_info, char *alias_string);
+int allot_alias(shellinfo_t *shell_info, char *alias_string);
+int output_alias(list_item_t *alias_n);
+int sshell_alias(shellinfo_t *shell_info);
 
 /* string_list.c */
 

@@ -1,0 +1,985 @@
+In file included from buff_input.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+buff_input.c: In function ‘buff_input’:
+buff_input.c:25:7: error: implicit declaration of function ‘_gtinpu’; did you mean ‘_getinpu’? [-Werror=implicit-function-declaration]
+   25 |  rd = _gtinpu(sdata);
+      |       ^~~~~~~
+      |       _getinpu
+buff_input.c:15:9: error: unused variable ‘lentm’ [-Werror=unused-variable]
+   15 |  size_t lentm = 0;
+      |         ^~~~~
+cc1: all warnings being treated as errors
+In file included from builtin_handlers.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+builtin_handlers.c: In function ‘shell_curdir’:
+builtin_handlers.c:43:35: error: expected ‘)’ before numeric constant
+   43 |  o = getcwd(buffer, sizeof(buffer)1024);
+      |                                   ^~~~
+      |                                   )
+builtin_handlers.c:48:9: error: implicit declaration of function ‘_getenv’; did you mean ‘getenv’? [-Werror=implicit-function-declaration]
+   48 |   drt = _getenv(shell_info, "HOME=");
+      |         ^~~~~~~
+      |         getenv
+builtin_handlers.c:50:64: error: pointer/integer type mismatch in conditional expression [-Werror]
+   50 |    chdir_ret = chdir((drt = _getenv(shell_info, "PWD=")) ? drt : "/");
+      |                                                                ^
+builtin_handlers.c:52:22: error: passing argument 1 of ‘chdir’ makes pointer from integer without a cast [-Werror=int-conversion]
+   52 |    chdir_ret = chdir(drt);
+      |                      ^~~
+      |                      |
+      |                      char
+In file included from simpleshell.h:7,
+                 from builtin_handlers.c:1:
+/usr/include/unistd.h:497:31: note: expected ‘const char *’ but argument is of type ‘char’
+  497 | extern int chdir (const char *__path) __THROW __nonnull ((1)) __wur;
+      |                   ~~~~~~~~~~~~^~~~~~
+builtin_handlers.c:54:11: error: implicit declaration of function ‘_strcmp’; did you mean ‘_str_cmp’? [-Werror=implicit-function-declaration]
+   54 |  else if (_strcmp(shell_info->args[1], "-") == 0)
+      |           ^~~~~~~
+      |           _str_cmp
+builtin_handlers.c:58:10: error: ‘s’ undeclared (first use in this function)
+   58 |    _puts(s);
+      |          ^
+builtin_handlers.c:58:10: note: each undeclared identifier is reported only once for each function it appears in
+builtin_handlers.c:62:9: error: implicit declaration of function ‘get_evval’; did you mean ‘get_envval’? [-Werror=implicit-function-declaration]
+   62 |   _puts(get_evval(shell_info, "OLDPWD=")), _put_char('\n');
+      |         ^~~~~~~~~
+      |         get_envval
+builtin_handlers.c:62:9: error: passing argument 1 of ‘_puts’ makes pointer from integer without a cast [-Werror=int-conversion]
+   62 |   _puts(get_evval(shell_info, "OLDPWD=")), _put_char('\n');
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |         |
+      |         int
+In file included from builtin_handlers.c:1:
+simpleshell.h:193:18: note: expected ‘char *’ but argument is of type ‘int’
+  193 | void _puts(char *string);
+      |            ~~~~~~^~~~~~
+builtin_handlers.c:63:26: error: assignment to ‘char’ from ‘char *’ makes integer from pointer without a cast [-Werror=int-conversion]
+   63 |   chdir_ret = chdir((drt = get_envval(shell_info, "OLDPWD=")) ? drt : "/");
+      |                          ^
+builtin_handlers.c:63:69: error: pointer/integer type mismatch in conditional expression [-Werror]
+   63 |   chdir_ret = chdir((drt = get_envval(shell_info, "OLDPWD=")) ? drt : "/");
+      |                                                                     ^
+builtin_handlers.c:74:3: error: too many arguments to function ‘set_enviro_var’
+   74 |   set_enviro_var(shell_info, "OLDPWD", get_envval(shell_info, "PWD="));
+      |   ^~~~~~~~~~~~~~
+In file included from builtin_handlers.c:1:
+simpleshell.h:145:5: note: declared here
+  145 | int set_enviro_var(shellinfo_t *shell_info);
+      |     ^~~~~~~~~~~~~~
+builtin_handlers.c:75:3: error: too many arguments to function ‘set_enviro_var’
+   75 |   set_enviro_var(shell_info, "PWD", getcwd(buffer, 1024));
+      |   ^~~~~~~~~~~~~~
+In file included from builtin_handlers.c:1:
+simpleshell.h:145:5: note: declared here
+  145 | int set_enviro_var(shellinfo_t *shell_info);
+      |     ^~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+In file included from command_chaining.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+command_chaining.c: In function ‘change_aliases’:
+command_chaining.c:88:7: error: implicit declaration of function ‘_str_dup’; did you mean ‘_strd_up’? [-Werror=implicit-function-declaration]
+   88 |   e = _str_dup(e + 1);
+      |       ^~~~~~~~
+      |       _strd_up
+command_chaining.c:88:5: error: assignment to ‘char *’ from ‘int’ makes pointer from integer without a cast [-Werror=int-conversion]
+   88 |   e = _str_dup(e + 1);
+      |     ^
+cc1: all warnings being treated as errors
+In file included from data.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+data.c: In function ‘config_data’:
+data.c:42:3: error: implicit declaration of function ‘change_vars’; did you mean ‘change_aliases’? [-Werror=implicit-function-declaration]
+   42 |   change_vars(sdata);
+      |   ^~~~~~~~~~~
+      |   change_aliases
+cc1: all warnings being treated as errors
+In file included from envir2.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+envir2.c: In function ‘unset_envir’:
+envir2.c:37:18: error: ‘nod’ undeclared (first use in this function); did you mean ‘node’?
+   37 |   b = start_with(nod->value, envi_var);
+      |                  ^~~
+      |                  node
+envir2.c:37:18: note: each undeclared identifier is reported only once for each function it appears in
+In file included from envir.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from file_io_helpers.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+file_io_helpers.c: In function ‘w_hist’:
+file_io_helpers.c:49:3: error: implicit declaration of function ‘_puts_char’; did you mean ‘_put_char’? [-Werror=implicit-function-declaration]
+   49 |   _puts_char('\n');
+      |   ^~~~~~~~~~
+      |   _put_char
+file_io_helpers.c: In function ‘r_hist’:
+file_io_helpers.c:118:1: error: ISO C forbids nested functions [-Werror=pedantic]
+  118 | int add_to_history(shellinfo_t *sdata, char *buff, int linec)
+      | ^~~
+file_io_helpers.c:118:1: error: ISO C90 forbids mixed declarations and code [-Werror=declaration-after-statement]
+file_io_helpers.c:136:1: error: ISO C forbids nested functions [-Werror=pedantic]
+  136 | int update_history_num(shellinfo_t *sdata)
+      | ^~~
+file_io_helpers.c:147:1: error: expected declaration or statement at end of input
+  147 | }
+      | ^
+file_io_helpers.c:147: error: control reaches end of non-void function [-Werror=return-type]
+  147 | }
+      | 
+At top level:
+file_io_helpers.c:136:5: error: ‘update_history_num’ defined but not used [-Werror=unused-function]
+  136 | int update_history_num(shellinfo_t *sdata)
+      |     ^~~~~~~~~~~~~~~~~~
+file_io_helpers.c:118:5: error: ‘add_to_history’ defined but not used [-Werror=unused-function]
+  118 | int add_to_history(shellinfo_t *sdata, char *buff, int linec)
+      |     ^~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+In file included from get_cmd_read.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+get_cmd_read.c: In function ‘_getinpu’:
+get_cmd_read.c:16:17: error: initialization of ‘char **’ from incompatible pointer type ‘char ***’ [-Werror=incompatible-pointer-types]
+   16 |  char **arg_p = &(sdata->args);
+      |                 ^
+get_cmd_read.c:29:8: error: implicit declaration of function ‘is_chain’; did you mean ‘cmd_chain’? [-Werror=implicit-function-declaration]
+   29 |    if (is_chain(sdata, bff, &k))
+      |        ^~~~~~~~
+      |        cmd_chain
+cc1: all warnings being treated as errors
+In file included from _get_line.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+_get_line.c:12:14: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+   12 | int sh_gline(shell_info_t *sdata, char **pnt, size_t *lng)
+      |              ^~~~~~~~~~~~
+      |              shellinfo_t
+In file included from handle_errors.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from handle_memory.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from helper_function2.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from helper_function.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from hsh_loop.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+hsh_loop.c: In function ‘hsh’:
+hsh_loop.c:34:2: error: implicit declaration of function ‘preserve_hist’ [-Werror=implicit-function-declaration]
+   34 |  preserve_hist(shell_info);
+      |  ^~~~~~~~~~~~~
+hsh_loop.c: In function ‘find_built_in’:
+hsh_loop.c:68:13: error: ‘sshell_alias’ undeclared (first use in this function)
+   68 |   {"alias", sshell_alias},
+      |             ^~~~~~~~~~~~
+hsh_loop.c:68:13: note: each undeclared identifier is reported only once for each function it appears in
+hsh_loop.c:68:3: error: missing initializer for field ‘func’ of ‘builtin_table’ {aka ‘struct builtin’} [-Werror=missing-field-initializers]
+   68 |   {"alias", sshell_alias},
+      |   ^
+In file included from hsh_loop.c:1:
+simpleshell.h:112:8: note: ‘func’ declared here
+  112 |  int (*func)(shellinfo_t *);
+      |        ^~~~
+hsh_loop.c: In function ‘find_command’:
+hsh_loop.c:97:18: error: ‘shellinfo_t’ {aka ‘struct shellinfo’} has no member named ‘count_input’; did you mean ‘countflag_input’?
+   97 |  if (shell_info->count_input == 1)
+      |                  ^~~~~~~~~~~
+      |                  countflag_input
+hsh_loop.c:99:13: error: ‘shellinfo_t’ {aka ‘struct shellinfo’} has no member named ‘exec_count’
+   99 |   shell_info->exec_count++;
+      |             ^~
+hsh_loop.c:100:15: error: ‘shellinfo_t’ {aka ‘struct shellinfo’} has no member named ‘count_input’; did you mean ‘countflag_input’?
+  100 |   shell_info->count_input = 0;
+      |               ^~~~~~~~~~~
+      |               countflag_input
+cc1: all warnings being treated as errors
+In file included from more_builtin_handlers.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from path_handler.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from shell_strings2.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from shell_strings3.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from shell_strings.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from simshell_main.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+simshell_main.c: In function ‘main’:
+simshell_main.c:13:2: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |  ^~~~~~~~~~~~
+      |  shellinfo_t
+simshell_main.c:13:28: error: initialization of ‘int’ from ‘void *’ makes integer from pointer without a cast [-Werror=int-conversion]
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+In file included from simshell_main.c:1:
+simpleshell.h:101:20: error: excess elements in scalar initializer [-Werror]
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                    ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:20: note: (near initialization for ‘shell_info’)
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                    ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:23: error: excess elements in scalar initializer [-Werror]
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                       ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:23: note: (near initialization for ‘shell_info’)
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                       ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:26: error: excess elements in scalar initializer [-Werror]
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                          ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:26: note: (near initialization for ‘shell_info’)
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                          ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:29: error: excess elements in scalar initializer [-Werror]
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                             ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:29: note: (near initialization for ‘shell_info’)
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                             ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+In file included from simshell_main.c:1:
+simpleshell.h:101:62: error: excess elements in scalar initializer [-Werror]
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                                                              ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:62: note: (near initialization for ‘shell_info’)
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                                                              ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:65: error: excess elements in scalar initializer [-Werror]
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                                                                 ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:101:65: note: (near initialization for ‘shell_info’)
+  101 | {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+      |                                                                 ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simshell_main.c:13:28: error: excess elements in scalar initializer [-Werror]
+simshell_main.c:13:28: note: (near initialization for ‘shell_info’)
+In file included from simshell_main.c:1:
+simpleshell.h:102:2: error: excess elements in scalar initializer [-Werror]
+  102 |  0, 0, 0}
+      |  ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:102:2: note: (near initialization for ‘shell_info’)
+  102 |  0, 0, 0}
+      |  ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:102:5: error: excess elements in scalar initializer [-Werror]
+  102 |  0, 0, 0}
+      |     ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:102:5: note: (near initialization for ‘shell_info’)
+  102 |  0, 0, 0}
+      |     ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:102:8: error: excess elements in scalar initializer [-Werror]
+  102 |  0, 0, 0}
+      |        ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simpleshell.h:102:8: note: (near initialization for ‘shell_info’)
+  102 |  0, 0, 0}
+      |        ^
+simshell_main.c:13:28: note: in expansion of macro ‘INFO_INIT’
+   13 |  shell_info_t shell_info = INFO_INIT;
+      |                            ^~~~~~~~~
+simshell_main.c:32:13: error: request for member ‘input_fd’ in something not a structure or union
+   32 |   shell_info.input_fd = input_file_desc;
+      |             ^
+simshell_main.c:34:14: error: passing argument 1 of ‘pop_envlist’ from incompatible pointer type [-Werror=incompatible-pointer-types]
+   34 |  pop_envlist(&shell_info);
+      |              ^~~~~~~~~~~
+      |              |
+      |              int *
+In file included from simshell_main.c:1:
+simpleshell.h:147:30: note: expected ‘shellinfo_t *’ {aka ‘struct shellinfo *’} but argument is of type ‘int *’
+  147 | int pop_envlist(shellinfo_t *shell_info);
+      |                 ~~~~~~~~~~~~~^~~~~~~~~~
+simshell_main.c:35:2: error: implicit declaration of function ‘scan_hist’ [-Werror=implicit-function-declaration]
+   35 |  scan_hist(&shell_info);
+      |  ^~~~~~~~~
+simshell_main.c:36:2: error: implicit declaration of function ‘hsh’ [-Werror=implicit-function-declaration]
+   36 |  hsh(&shell_info, arg_val);
+      |  ^~~
+cc1: all warnings being treated as errors
+In file included from string_list2.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from string_list.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
+In file included from string_split.c:1:
+simpleshell.h:128:17: error: unknown type name ‘shell_nfo_t’; did you mean ‘shellinfo_t’?
+  128 | int change_vars(shell_nfo_t *inf);
+      |                 ^~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:170:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  170 | int erase_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:171:17: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  171 | int allot_alias(shell_info_t *shell_info, char *alias_string);
+      |                 ^~~~~~~~~~~~
+      |                 shellinfo_t
+simpleshell.h:172:18: error: unknown type name ‘listitem_t’; did you mean ‘list_item_t’?
+  172 | int output_alias(listitem_t *alias_n);
+      |                  ^~~~~~~~~~
+      |                  list_item_t
+simpleshell.h:173:18: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  173 | int sshell_alias(shell_info_t *shell_info);
+      |                  ^~~~~~~~~~~~
+      |                  shellinfo_t
+simpleshell.h:191:20: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  191 | int is_interactive(shell_info_t *info);
+      |                    ^~~~~~~~~~~~
+      |                    shellinfo_t
+simpleshell.h:241:9: error: unknown type name ‘shell_info_t’; did you mean ‘shellinfo_t’?
+  241 | int hsh(shell_info_t *shell_info, char **argv);
+      |         ^~~~~~~~~~~~
+      |         shellinfo_t
