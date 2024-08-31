@@ -28,16 +28,16 @@ void error_puts(char *string)
  */
 int error_putchar(char ch)
 {
-	static int num;
-	static char buffer[INPUT_BUFFER_SIZE];
+	static int buffer_index;
+	static char buffer[WRITE_BUFFER_SIZE];
 
-	if (ch == FLUSH_BUFFER || num >= INPUT_BUFFER_SIZE)
+	if (ch == FLUSH_BUFFER || buffer_index >= WRITE_BUFFER_SIZE)
 	{
-		write(2, buffer, num);
-		num = 0;
+		write(2, buffer, buffer_index);
+		buffer_index = 0;
 	}
 	if (ch != FLUSH_BUFFER)
-		buffer[num++] = ch;
+		buffer[buffer_index++] = ch;
 	return (1);
 }
 
@@ -50,16 +50,16 @@ int error_putchar(char ch)
  */
 int _put_filed(char ch, int filed)
 {
-	static int k;
-	static char buf[INPUT_BUFFER_SIZE];
+	static int buffer_index;
+	static char buffer[WRITE_BUFFER_SIZE];
 
-	if (ch == FLUSH_BUFFER || k >= INPUT_BUFFER_SIZE)
+	if (ch == FLUSH_BUFFER || buffer_index >= WRITE_BUFFER_SIZE)
 	{
-		write(filed, buf, k);
-		k = 0;
+		write(filed, buffer, buffer_index);
+		buffer_index = 0;
 	}
 	if (ch != FLUSH_BUFFER)
-		buf[k++] = ch;
+		buffer[buffer_index++] = ch;
 	return (1);
 }
 
@@ -72,13 +72,13 @@ int _put_filed(char ch, int filed)
  */
 int _puts_filed(char *string, int filed)
 {
-	int k = 0;
+	int char_count = 0;
 
 	if (!string)
 		return (0);
 	while (*string)
 	{
-		k += _put_filed(*string++, filed);
+		char_count += _put_filed(*string++, filed);
 	}
-	return (k);
+	return (char_count);
 }
