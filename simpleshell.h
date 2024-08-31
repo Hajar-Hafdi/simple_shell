@@ -13,11 +13,10 @@
 #include <fcntl.h>
 #include <errno.h>
 
-/* Buffer sizes intended for writing as well as writing */
+/* Buffer sizes intended for writing as well as reading */
 
-#define READ_BUF_SIZE 1024
-#define INPUT_BUFFER_SIZE 1024
-#define OUTPUT_BUFFER_SIZE 1024
+#define READ_BUFFER_SIZE 1024
+#define WRITE_BUFFER_SIZE 1024
 #define FLUSH_BUFFER -1
 
 /* Command chaining options */
@@ -61,9 +60,9 @@ typedef struct list_item
  * @args:           the parsed array of args taken from input
  * @current_path:      the resolved path for the current command
  * @arg_count:      the number of args parsed
- * @exec_count:     the total num of commands executed, error tracking
- * @exit_code:      the exit code from the last executed cmd
- * @count_input:    flag to indicate if current input should be counted
+ * @execline_count:     the total num of commands executed, error tracking
+ * @errexit_code:      the exit code from the last executed cmd
+ * @countflag_input:    flag to indicate if current input should be counted
  * @program_name:   the name of the shell prog
  * @env_list:       a linked list showing shell's env vars
  * @env_array:      an array of env vars.
@@ -76,15 +75,15 @@ typedef struct list_item
  * @input_fd:       file descriptor for input
  * @history_count:  num of cmds in history list.
  */
-typedef struct shell_info
+typedef struct shellinfo
 {
 	char *input;
 	char **args;
 	char *current_path;
 	int arg_count;
-	int exec_count;
-	int exit_code;
-	int count_input;
+	unsigned int execline_count;
+	int errexit_code;
+	int countflag_input;
 	char *program_name;
 	list_item_t *env_list;
 	char **env_array;
@@ -100,7 +99,7 @@ typedef struct shell_info
 
 #define  INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	CHAIN_NORMAL, -1, 0}
+	0, 0, 0}
 
 /**
  * struct builtin - associates a builtin cmd with its function
@@ -110,8 +109,8 @@ typedef struct shell_info
 typedef struct builtin
 {
 	char *command;
-	int (*func)(shell_info_t *);
-} builtin_t;
+	int (*func)(shellinfo_t *);
+} builtin_table;
 
 
 

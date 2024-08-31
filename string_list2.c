@@ -119,4 +119,3 @@ ssize_t aqu_nd_indx(list_item_t *hd, list_item_t *nd)
 	}
 	return (-1);
 }
-
