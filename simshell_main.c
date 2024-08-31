@@ -10,7 +10,7 @@
  */
 int main(int arg_cnt, char **arg_val)
 {
-	shell_info_t shell_info = INFO_INIT;
+	shellinfo_t shell_info = INFO_INIT;
 	int input_file_desc;
 
 	if (arg_cnt == 2)

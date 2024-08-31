@@ -54,6 +54,45 @@ int w_hist(shellinfo_t *sdata)
 	return (1);
 }
 /**
+ * add_to_history - appends an entry to hist
+ *
+ * @sdata: ptr to shell info strct
+ * @buff: buffer having hist entry
+ * @linec: line count of hist rntry
+ *
+ * Return: always 0 (Success)
+ */
+int add_to_history(shellinfo_t *sdata, char *buff, int linec)
+{
+	list_item_t *nod = NULL;
+
+	if (sdata->cmd_history)
+		nod = sdata->cmd_history;
+	app_ndend(&nod, buff, linec);
+	if (!sdata->cmd_history)
+		sdata->cmd_history = nod;
+	return (0);
+}
+/**
+ * updhistory_num - remmebers the history linked list after chgs
+ *
+ * @sdata: ptr to shell info struct
+ *
+ * Return: returns new hist count
+ */
+int updhistory_num(shellinfo_t *sdata)
+{
+	list_item_t *nod = sdata->cmd_history;
+	int u = 0;
+
+	while (nod)
+	{
+		nod->number = u++;
+		nod = nod->next;
+	}
+	return (sdata->history_count = u);
+}
+/**
  * r_hist - reads hist from a file
  *
  * @sdata: ptr to shell info struct
@@ -95,8 +134,8 @@ int r_hist(shellinfo_t *sdata)
 			buff[u] = 0;
 			add_to_history(sdata, buff + last, linec++);
 			last = u + 1;
-		
 		}
+	}
 	if (last != u)
 		add_to_history(sdata, buff + last, linec++);
 	free(buff);
@@ -105,43 +144,4 @@ int r_hist(shellinfo_t *sdata)
 		remove_nd_idx(&(sdata->cmd_history), 0);
 	updhistory_num(sdata);
 	return (sdata->history_count);
-}
-/**
- * add_to_history - appends an entry to hist
- *
- * @sdata: ptr to shell info strct
- * @buff: buffer having hist entry
- * @linec: line count of hist rntry
- *
- * Return: always 0 (Success)
- */
-int add_to_history(shellinfo_t *sdata, char *buff, int linec)
-{
-	list_item_t *nod = NULL;
-
-	if (sdata->cmd_history)
-		nod = sdata->cmd_history;
-	app_ndend(&nod, buff, linec);
-	if (!sdata->cmd_history)
-		sdata->cmd_history = nod;
-	return (0);
-}
-/**
- * updhistory_num - remmebers the history linked list after chgs
- *
- * @sdata: ptr to shell info struct
- *
- * Return: returns new hist count
- */
-int updhistory_num(shellinfo_t *sdata)
-{
-	list_item_t *nod = sdata->cmd_history;
-	int u = 0;
-
-	while (nod)
-	{
-		nod->number = u++;
-		nod = nod->next;
-	}
-	return (sdata->history_count = u);
 }
