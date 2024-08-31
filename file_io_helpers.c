@@ -7,7 +7,7 @@
  *
  * Return: allocated string having hist file path
  */
-char *retrieve_hist(shell_info_t *sdata)
+char *retrieve_hist(shellinfo_t *sdata)
 {
 	char *buff, *home_dirct;
 
@@ -25,71 +25,77 @@ char *retrieve_hist(shell_info_t *sdata)
 	return (buff);
 }
 /**
- * preserve_hist - creates or adds to history filr
+ * w_hist - creates or adds to history filr
  *
  * @sdata: ptr to shell inf struct
  *
  * Return: 1 if successful, 0 if not
  */
-int preserve_hist(shell_info_t *sdata)
+int w_hist(shellinfo_t *sdata)
 {
 	ssize_t filed;
-	char* filenm = retrieve_hist(sdata);
-	list_item_t *nod = NULL;
+	char *filenm = retrieve_hist(sdata);
+	list_item_t *node = NULL;
 
-	if (filenm == NULL)
-		return (1);
+	if (!filenm)
+		return (-1);
 	filed = open(filenm, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filenm);
 	if (filed == -1)
 		return (-1);
-	for (nod = sdata->cmd_history; nod; nod = nod->next)
+	for (node = sdata->cmd_history; node; node = node->next)
 	{
-		_puts_filed(nod->value, filed);
-		_puts_filed("\n", filed);
+		_puts_filed(node->value, filed);
+		_puts_char('\n');
 	}
-	_puts_filed("", filed);
+	_put_char(FLUSH_BUFFER);
+	close(filed);
 
 	return (1);
 }
 /**
- * scan_hist - reads hist from a file
+ * r_hist - reads hist from a file
  *
  * @sdata: ptr to shell info struct
  *
  * Return: the num of entries in hist
  */
-int scan_hist(shell_info_t *sdata)
+int r_hist(shellinfo_t *sdata)
 {
 	int u, linec = 0, last = 0;
-	ssize_t filed, readlen, files = 0;
+	ssize_t fld, rdlenn, fz = 0;
 	struct stat st;
 	char *buff = NULL, *filenm = retrieve_hist(sdata);
 
-	if (filenm == NULL)
-		return (1);
-	filed = open(filenm, O_RDONLY);
+	if (!filenm)
+		return (0);
+	fld = open(filenm, O_RDONLY);
 	free(filenm);
-	if (filed == -1)
+	if (fld == -1)
 		return (0);
-	if (!fstat(filed, &st))
-		files = st.st_size;
-	if (files < 2)
+	if (!fstat(fld, &st))
+		fz = st.st_size;
+	if (fz < 2)
 		return (0);
-	buff = malloc(sizeof(char) * (files + 1));
+	buff = malloc(sizeof(char) * (fz + 1));
 	if (!buff)
 		return (0);
-	readlen = read(filed, buff, files);
-	buff[files] = 0;
-	if (readlen <= 0)
-		return (free(buff), 0);
-	close(filed);
-	for (u = 0; u < files; u++)
+	rdlenn = read(fld, buff, fz);
+	buff[fz] = 0;
+	if (rdlenn <= 0)
+	{
+		free(buff);
+		return (0);
+	}
+	close(fld);
+	for (u = 0; u < fz; u++)
+	{
 		if (buff[u] == '\n')
 		{
 			buff[u] = 0;
 			add_to_history(sdata, buff + last, linec++);
 			last = u + 1;
+		
 		}
 	if (last != u)
 		add_to_history(sdata, buff + last, linec++);
@@ -97,7 +103,7 @@ int scan_hist(shell_info_t *sdata)
 	sdata->history_count = linec;
 	while (sdata->history_count-- >= MAXIMUM_HISTORY_ENTERIES)
 		remove_nd_idx(&(sdata->cmd_history), 0);
-	update_history_num(sdata);
+	updhistory_num(sdata);
 	return (sdata->history_count);
 }
 /**
@@ -109,7 +115,7 @@ int scan_hist(shell_info_t *sdata)
  *
  * Return: always 0 (Success)
  */
-int add_to_history(shell_info_t *sdata, char *buff, int linec)
+int add_to_history(shellinfo_t *sdata, char *buff, int linec)
 {
 	list_item_t *nod = NULL;
 
@@ -121,13 +127,13 @@ int add_to_history(shell_info_t *sdata, char *buff, int linec)
 	return (0);
 }
 /**
- * update_history_num - remmebers the history linked list after chgs
+ * updhistory_num - remmebers the history linked list after chgs
  *
  * @sdata: ptr to shell info struct
  *
  * Return: returns new hist count
  */
-int update_history_num(shell_info_t *sdata)
+int update_history_num(shellinfo_t *sdata)
 {
 	list_item_t *nod = sdata->cmd_history;
 	int u = 0;

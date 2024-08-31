@@ -1,32 +1,32 @@
 #include "simpleshell.h"
 
 /**
- * get_cmd - gets a ine of input minus the neln
+ * _getinpu - gets a ine of input minus the neln
  *
  * @sdata: struct holding shell params
  *
  * Return: num of by read
  */
-ssize_t get_cmd(shell_info_t *sdata)
+ssize_t _getinpu(shellinfo_t *sdata)
 {
 	static char *bff;
 	static size_t u, k, lng;
-	ssize_t bread = 0;
-	char *pntr;
-	char **arg_p = sdata->buffer;
+	ssize_t b = 0;
+	char *pr;
+	char **arg_p = &(sdata->args);
 
 	_put_char(FLUSH_BUFFER);
-	bread = buff_input(sdata, &bff, &lng);
-	if (bread == -1)
+	b = buff_input(sdata, &bff, &lng);
+	if (b == -1)
 		return (-1);
 	if (lng)
 	{
 		k = u;
-		pntr = bff + u;
-		handle_cmd_chain(sdata, bff, &k, u, lng);
+		pr = bff + u;
+		chk_cmd_chain(sdata, bff, &k, u, lng);
 		while (k < lng)
 		{
-			if (cmd_chain(sdata, bff, &k))
+			if (is_chain(sdata, bff, &k))
 				break;
 			k++;
 		}
@@ -36,14 +36,14 @@ ssize_t get_cmd(shell_info_t *sdata)
 			u = lng = 0;
 			sdata->buffer_type = CHAIN_NORMAL;
 		}
-		*arg_p = pntr;
-		return (_str_length(pntr));
+		*arg_p = pr;
+		return (_str_length(pr));
 	}
 	*arg_p = bff;
-	return (bread);
+	return (b);
 }
 /**
- * read_bf - reads data into a buff
+ * r_bufff - reads data into a buff
  *
  * @sdata: strct holding shell params
  * @screen: screen to store the read data
@@ -51,13 +51,13 @@ ssize_t get_cmd(shell_info_t *sdata)
  *
  * Return: num of bytes read
  */
-ssize_t read_bf(shell_info_t *sdata, char *screen, size_t *sze)
+ssize_t r_bufff(shellinfo_t *sdata, char *screen, size_t *sze)
 {
 	ssize_t bt_r = 0;
 
 	if (*sze)
 		return (0);
-	bt_r = read(sdata->input_fd, screen, READ_BUF_SIZE);
+	bt_r = read(sdata->input_fd, screen, READ_BUFFER_SIZE);
 	if (bt_r >= 0)
 		*sze = bt_r;
 	return (bt_r);
