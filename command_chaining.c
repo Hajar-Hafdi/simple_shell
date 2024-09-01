@@ -124,10 +124,10 @@ int change_vars(shellinfo_t *inf)
 		if (nod)
 		{
 			change_string(&(inf->args[u]),
-					_strd_up(strchr(nod->value, '=') + 1));
+					_strd_up(_str_chr(nod->value, '=') + 1));
 			continue;
 		}
-		change_string(&inf->args[u], strdup(""));
+		change_string(&inf->args[u], _strd_up(""));
 	}
 	return (0);
 }
