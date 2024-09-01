@@ -220,7 +220,7 @@ int print_decimal(int input, int filed);
 /* handle_errors.c */
 void error_puts(char *string);
 int error_putchar(char ch);
-int _puts_filed(char *string, int filed);
+int _put_filed(char ch, int filed);
 int _puts_filed(char *string, int filed);
 
 /*helper_function2.c */
