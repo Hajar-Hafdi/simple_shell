@@ -14,13 +14,13 @@ ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 	ssize_t rd = 0;
 	size_t le = 0;
 
-	if (!buff || !*buff)
+	if (!*bulen)
 	{
 		free(*buff);
 		*buff = NULL;
 	signal(SIGINT, sigint);
 #if USE_SYSTEM_GETLINE
-	rd = sh_gline(sdata, buff, stdin);
+	rd = sh_gline(buff, &le stdin);
 #else
 	rd = sh_gline(sdata, buff, &le);
 #endif
@@ -34,9 +34,10 @@ ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 		sdata->countflag_input = 1;
 		remove_comm(*buff);
 		add_to_history(sdata, *buff, sdata->history_count++);
-		*bulen = rd;
-		sdata->buffer = buff;
-	}
+		{
+			*bulen = rd;
+			sdata->buffer = buff;
+		}
 	}
 	return (rd);
 }
