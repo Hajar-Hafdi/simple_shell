@@ -31,7 +31,7 @@ int erase_alias(shellinfo_t *shell_info, char *alias_string)
 	if (!sign)
 		return (1);
 	tempp = *sign;
-	*sign = '\0';
+	*sign = 0;
 	outcome = remove_nd_idx(&(shell_info->aliases),
 			aqu_nd_indx(shell_info->aliases,
 				nd_begin_with(shell_info->aliases, alias_string, -1)));
