@@ -54,7 +54,7 @@ int allot_alias(shellinfo_t *shell_info, char *alias_string)
 	if (!signn)
 		return (1);
 	if (!*++signn)
-		 return (erase_alias(shell_info, alias_string));
+		return (erase_alias(shell_info, alias_string));
 	erase_alias(shell_info, alias_string);
 	return (app_ndend(&(shell_info->aliases), alias_string, 0) == NULL);
 }

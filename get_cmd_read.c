@@ -35,7 +35,7 @@ ssize_t _getinpu(shellinfo_t *sdata)
 			u = lng = 0;
 			sdata->buffer_type = CHAIN_NORMAL;
 		}
-		sdata->args= &pr;
+		sdata->args = &pr;
 		return (_str_length(pr));
 	}
 	sdata->args = &bff;

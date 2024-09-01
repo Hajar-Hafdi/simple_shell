@@ -122,21 +122,15 @@ int r_hist(shellinfo_t *sdata)
 	rdlenn = read(fld, buff, fz);
 	buff[fz] = 0;
 	if (rdlenn <= 0)
-	{
 		free(buff);
 		return (0);
-	}
 	close(fld);
 	for (u = 0; u < fz; u++)
-	{
 		if (buff[u] == '\n')
-		{
 			buff[u] = 0;
-			add_to_history(sdata, buff + last, linec++);
+	add_to_history(sdata, buff + last, linec++);
 			last = u + 1;
-		}
-	}
-	if (last != u)
+		if (last != u)
 		add_to_history(sdata, buff + last, linec++);
 	free(buff);
 	sdata->history_count = linec;
