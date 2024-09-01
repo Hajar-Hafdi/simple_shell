@@ -13,6 +13,7 @@ ssize_t _getinpu(shellinfo_t *sdata)
 	static size_t u, k, lng;
 	ssize_t b = 0;
 	char *pr;
+	char **arg_p = &(sdata->input);
 
 	_put_char(FLUSH_BUFFER);
 	b = buff_input(sdata, &bff, &lng);
@@ -35,10 +36,10 @@ ssize_t _getinpu(shellinfo_t *sdata)
 			u = lng = 0;
 			sdata->buffer_type = CHAIN_NORMAL;
 		}
-		sdata->args = &pr;
+		*arg_p = pr;
 		return (_str_length(pr));
 	}
-	sdata->args = &bff;
+	*arg_p = bff;
 	return (b);
 }
 /**
