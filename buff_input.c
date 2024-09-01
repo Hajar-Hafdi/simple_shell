@@ -39,5 +39,6 @@ ssize_t buff_input(shellinfo_t *sdata, char **buff, size_t *bulen)
 			sdata->buffer = buff;
 		}
 	}
+	}
 	return (rd);
 }
