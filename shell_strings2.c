@@ -57,20 +57,17 @@ char *_strd_up(const char *string)
  */
 int _str_cmp(char *str1, char *str2)
 {
-	if (str1 == NULL || str2 == NULL)
-	{
-		return (-1);
-	}
 	while (*str1 && *str2)
 	{
 		if (*str1 != *str2)
-		{
-			return *(unsigned char *)str1 - *(unsigned char *)str2;
-		}
+			return (*str1 - *str2);
 		str1++;
 		str2++;
 	}
-	return *(unsigned char *)str1 - *(unsigned char *)str2;
+	if (*str1 == *str2)
+		return (0);
+	else
+		return (*str1 < *str2 ? -1 : 1);
 }
 /**
  * start_with - check if the needle starts with haystack
