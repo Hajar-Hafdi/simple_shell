@@ -37,7 +37,6 @@ int main(int arg_cnt, char **arg_val)
 	return (EXIT_SUCCESS);
     /* Close the file descriptor if it's not the standard input*/
 	if (input_file_desc != STDIN_FILENO)
-	close(input_file_desc);
-
-    return (EXIT_SUCCESS);
+		close(input_file_desc);
+	return (EXIT_SUCCESS);
 }

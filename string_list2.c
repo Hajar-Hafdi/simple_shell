@@ -34,7 +34,7 @@ char **lst_str(list_item_t *hd)
 
 	if (!hd || !u)
 		return (NULL);
-	s = malloc(sizeof(char*) * (u + 1));
+	s = malloc(sizeof(char *) * (u + 1));
 	if (!s)
 		return (NULL);
 	for (u = 0; nd; nd = nd->next, u++)
