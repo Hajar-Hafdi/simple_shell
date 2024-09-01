@@ -6,10 +6,10 @@ bash
 Copier le code
 -i, --interactive
     Start the shell in interactive mode.
-    
+
 -c, --command <command>
     Execute the specified command and exit.
-    
+
 -h, --help
     Display this help and exit.
 #COMMANDS
@@ -29,7 +29,7 @@ setenv [variable] [value]
 
 unsetenv [variable]
     Remove an environment variable.
-    
+
 history
     Display the history of executed commands.
 
